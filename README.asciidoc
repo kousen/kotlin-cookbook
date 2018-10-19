@@ -1,0 +1,8 @@
+== Kotlin Cookbook samples
+
+Code from the book _Kotlin Cookbook_, to appear from O'Reilly in 2019.
+
+Ken Kousen +
+http://www.kousenit.com +
+ken.kousen@kousenit.com +
+https://twitter.com/kenkousen[@kenkousen]
