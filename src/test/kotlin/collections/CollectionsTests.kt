@@ -1,5 +1,8 @@
 package collections
 
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.contains
+import org.hamcrest.Matchers.not
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -13,15 +16,28 @@ class CollectionsTests {
     @Nested
     inner class ListTests {
         @Test
-        fun `toList on mutableList makes a readOnly new list`() {
-            val readOnlyNumList = mutableNums.toList()
+        fun `toList on mutableList makes a new readOnly list`() {
+            val readOnlyNumList: List<Int> = mutableNums.toList()
             assertEquals(mutableNums, readOnlyNumList)
             assertNotSame(mutableNums, readOnlyNumList)
         }
 
         @Test
-        internal fun `list val is readOnly ref to same list`() {
+        internal fun `modify mutable list does not change read-only list`() {
+            val readOnly = mutableNums.toList()
+            assertEquals(mutableNums, readOnly)
+
+            mutableNums.add(2)
+            assertThat(readOnly, not(contains(2)))
+        }
+
+        @Test
+        internal fun `read-only view of a mutable list`() {
             val readOnlySameList: List<Int> = mutableNums
+            assertEquals(mutableNums, readOnlySameList)
+            assertSame(mutableNums, readOnlySameList)
+
+            mutableNums.add(2)
             assertEquals(mutableNums, readOnlySameList)
             assertSame(mutableNums, readOnlySameList)
         }

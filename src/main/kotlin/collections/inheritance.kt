@@ -6,7 +6,7 @@ abstract class Employee(val id: Int, val name: String) {
     abstract fun computePay(): Double
 
     override fun toString(): String =
-        "$name makes ${NumberFormat.getCurrencyInstance().format(computePay())}"
+        "$name ($id) makes ${NumberFormat.getCurrencyInstance().format(computePay())}"
 }
 
 class Salaried(
