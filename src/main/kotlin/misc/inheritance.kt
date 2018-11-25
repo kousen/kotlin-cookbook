@@ -1,4 +1,4 @@
-package collections
+package misc
 
 import java.text.NumberFormat
 
