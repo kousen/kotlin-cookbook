@@ -3,6 +3,8 @@ package misc
 val <T> T.exhaustive: T
     get() = this
 
+
+
 fun printMod3(n: Int) {
     when (n % 3) {
         0 -> println("$n % 3 == 0")
