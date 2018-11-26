@@ -3,8 +3,6 @@ package misc
 val <T> T.exhaustive: T
     get() = this
 
-
-
 fun printMod3(n: Int) {
     when (n % 3) {
         0 -> println("$n % 3 == 0")
@@ -13,13 +11,12 @@ fun printMod3(n: Int) {
     }
 }
 
-fun printMod3SingleStatement(n: Int) =
-    when (n % 3) {
-        0 -> println("$n % 3 == 0")
-        1 -> println("$n % 3 == 1")
-        2 -> println("$n % 3 == 2")
-        else -> println("Houston, we have a problem...")
-    }
+fun printMod3SingleStatement(n: Int) = when (n % 3) {
+    0 -> println("$n % 3 == 0")
+    1 -> println("$n % 3 == 1")
+    2 -> println("$n % 3 == 2")
+    else -> println("Houston, we have a problem...")
+}
 
 fun printMod3Exhaustive(n: Int) {
     when (n % 3) {
