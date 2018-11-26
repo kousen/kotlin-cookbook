@@ -6,6 +6,9 @@ import org.hamcrest.Matchers.not
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.lang.UnsupportedOperationException
+import kotlin.collections.LinkedHashSet
 
 class CollectionsTests {
     private val numList = listOf(3, 1, 4, 1, 5, 9)
@@ -40,6 +43,35 @@ class CollectionsTests {
             mutableNums.add(2)
             assertEquals(mutableNums, readOnlySameList)
             assertSame(mutableNums, readOnlySameList)
+        }
+
+        @Test
+        internal fun `current implementation class of listOf is Arrays$ArrayList`() {
+            assertEquals("class java.util.Arrays\$ArrayList", numList::class.java.toString())
+        }
+
+        @Test
+        internal fun `numList is unmodifiable using add`() {
+            numList as MutableList
+            assertThrows<UnsupportedOperationException> { numList.add(42) }
+        }
+
+        @Test
+        internal fun `numList is unmodifiable using set`() {
+            numList as MutableList
+            assertDoesNotThrow { numList.set(0, 42) }
+        }
+    }
+
+    @Nested
+    inner class SetTests {
+        @Test
+        internal fun `setOf creates mutable set??`() {
+            assertEquals(LinkedHashSet::class, numSet::class)
+            numSet as MutableSet  // still need the smart cast in order for add to compile
+            numSet.add(42)
+            assertTrue(numSet.contains(42))  // but no exception this time
+            assertDoesNotThrow { numSet.add(42) }
         }
     }
 
