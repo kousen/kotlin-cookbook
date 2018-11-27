@@ -1,8 +1,7 @@
 package collections
 
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.contains
-import org.hamcrest.Matchers.not
+import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -66,7 +65,7 @@ class CollectionsTests {
     @Nested
     inner class SetTests {
         @Test
-        internal fun `setOf creates mutable set??`() {
+        internal fun `setOf creates mutable set`() {
             assertEquals(LinkedHashSet::class, numSet::class)
             numSet as MutableSet  // still need the smart cast in order for add to compile
             numSet.add(42)
@@ -75,4 +74,13 @@ class CollectionsTests {
         }
     }
 
+    @Nested
+    inner class MapTests {
+        @Test
+        internal fun `mapOf creates a map`() {
+            assertThat(numMap.keys, containsInAnyOrder(1, 3, 4))
+            assertThat(numMap.values, containsInAnyOrder("one", "three", "four"))
+            assertThat(3, `is`(numMap.size))
+        }
+    }
 }
