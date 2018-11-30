@@ -8,6 +8,8 @@ plugins {
 group = "com.kousenit"
 version = "1.0-SNAPSHOT"
 
+val junit5Version = "5.3.2"
+
 repositories {
     jcenter()
 }
@@ -17,18 +19,20 @@ dependencies {
     implementation(kotlin("reflect"))
 
     testImplementation("org.hamcrest:hamcrest-library:1.3")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.3.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junit5Version")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
 }
 
-configure<JavaPluginConvention> {
+java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-tasks.withType<Test> {
-    useJUnitPlatform()
+tasks {
+    test {
+        useJUnitPlatform()
+    }
 }
 
 tasks.withType<KotlinCompile> {
