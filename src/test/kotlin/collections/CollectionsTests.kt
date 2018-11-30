@@ -18,6 +18,22 @@ class CollectionsTests {
     @Nested
     inner class ListTests {
         @Test
+        fun `plus and minus operators add and remove elements`() {
+            val listPlusElement = numList + 2
+            assertTrue(2 in listPlusElement)
+
+            val listPlusList = numList + listOf(2, 6, 5)
+            assertThat(listPlusList, contains(3, 1, 4, 1, 5, 9, 2, 6, 5))
+
+            val listMinusElement = numList - 1
+            assertThat(listMinusElement, contains(3, 4, 1, 5, 9))
+
+            val listMinusList = numList - listOf(3, 1, 4, 9)
+            println(listMinusList)
+            assertThat(listMinusList, contains(1, 5))
+        }
+
+        @Test
         fun `toList on mutableList makes a new readOnly list`() {
             val readOnlyNumList: List<Int> = mutableNums.toList()
             assertEquals(mutableNums, readOnlyNumList)
@@ -64,6 +80,13 @@ class CollectionsTests {
 
     @Nested
     inner class SetTests {
+        @Test
+        internal fun `setOf eliminates duplicates`() {
+            assertThat(numSet.size, `is`(5))
+            assertThat(numSet, containsInAnyOrder(1, 3, 4, 5, 9))
+        }
+
+
         @Test
         internal fun `setOf creates mutable set`() {
             assertEquals(LinkedHashSet::class, numSet::class)
