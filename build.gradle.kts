@@ -18,6 +18,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
 
+    implementation("org.apache.commons:commons-math3:3.6.1")
+
     testImplementation("org.hamcrest:hamcrest-library:1.3")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junit5Version")
