@@ -1,7 +1,5 @@
 package collections
 
-data class Product(val name: String, var price: Double, var onSale: Boolean = false)
-
 fun onSaleProducts_ifEmptyCollection(products: List<Product>) =
     products.filter { it.onSale }
         .map { it.name }
