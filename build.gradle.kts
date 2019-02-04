@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.11"
+    kotlin("jvm") version "1.3.20"
 }
 
 group = "com.kousenit"
@@ -20,6 +20,7 @@ dependencies {
 
     implementation("org.apache.commons:commons-math3:3.6.1")
     implementation("com.google.code.gson:gson:2.8.5")
+    implementation("commons-validator:commons-validator:1.6")
 
     testImplementation("org.hamcrest:hamcrest-library:1.3")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
