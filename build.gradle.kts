@@ -2,13 +2,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.20"
+    kotlin("jvm") version "1.3.21"
 }
 
 group = "com.kousenit"
 version = "1.0-SNAPSHOT"
 
-val junit5Version = "5.3.2"
+val junit5Version = "5.4.0"
 
 repositories {
     jcenter()
@@ -22,13 +22,10 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.5")
     implementation("commons-validator:commons-validator:1.6")
 
-    testImplementation("org.hamcrest:hamcrest-library:1.3")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5Version")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:$junit5Version")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit5Version")
+    testImplementation("org.hamcrest:hamcrest:2.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junit5Version")
 
     testImplementation("junit:junit:4.12")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junit5Version")
 }
 
 java {
