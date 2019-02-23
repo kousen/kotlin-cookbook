@@ -8,8 +8,6 @@ plugins {
 group = "com.kousenit"
 version = "1.0-SNAPSHOT"
 
-val junit5Version = "5.4.0"
-
 repositories {
     jcenter()
 }
@@ -23,7 +21,7 @@ dependencies {
     implementation("commons-validator:commons-validator:1.6")
 
     testImplementation("org.hamcrest:hamcrest:2.1")
-    testImplementation("org.junit.jupiter:junit-jupiter:$junit5Version")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
 
     testImplementation("junit:junit:4.12")
 }
@@ -42,5 +40,6 @@ tasks {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = listOf("-Xjsr305=strict")
     }
 }
