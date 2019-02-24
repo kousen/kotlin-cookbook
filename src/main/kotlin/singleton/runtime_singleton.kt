@@ -2,13 +2,15 @@ package singleton
 
 import java.sql.Connection
 
+object MySingleton {
+    val myProperty = 3
+
+    fun myFunction() = "Hello"
+}
+
 object ConnectionPool {
     private val availablePool = mutableListOf<Connection>()
     val usedPool = mutableListOf<Connection>()
-
-    init {
-        availablePool
-    }
 
     fun getConnection() {
         // remove next connection from available pool

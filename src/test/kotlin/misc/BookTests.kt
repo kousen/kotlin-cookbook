@@ -142,11 +142,11 @@ internal class BookTests {
 
     @TestFactory
     fun `generate and run tests from collection`(): Collection<DynamicTest> {
-        return books.map {
-            DynamicTest.dynamicTest("Check ${it.title} is valid") {
-                assertTrue(it.published >= LocalDate.of(2013, Month.JANUARY, 1))
-                assertTrue(it.title::isNotBlank)
-                assertTrue(it.author::isNotBlank)
+        return books.map { book ->
+            DynamicTest.dynamicTest("Check ${book.title} is valid") {
+                assertTrue(book.published >= LocalDate.of(2013, Month.JANUARY, 1))
+                assertTrue(book.title::isNotBlank)
+                assertTrue(book.author::isNotBlank)
             }
         }.toList()
     }
