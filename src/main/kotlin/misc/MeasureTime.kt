@@ -14,14 +14,14 @@ fun main() {
     println("This machine has ${Runtime.getRuntime().availableProcessors()} processors")
 
     var time = measureTimeMillis {
-        IntStream.rangeClosed(1, 6)
+        IntStream.rangeClosed(1, 8)
             .map { doubleIt(it) }
             .sum()
     }
     println("Sequential stream took ${time}ms")
 
     time = measureTimeMillis {
-        IntStream.rangeClosed(1, 6)
+        IntStream.rangeClosed(1, 8)
             .parallel()
             .map { doubleIt(it) }
             .sum()
