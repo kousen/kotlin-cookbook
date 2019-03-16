@@ -8,7 +8,7 @@ data class Product(val name: String,
 
 data class AstroResult(
     val message: String,
-    val number: Number,
+    val number: Int,
     val people: List<Assignment>
 )
 
