@@ -11,10 +11,10 @@ internal class AstroRequestTest {
 
     @Test
     internal fun `get people in space`() {
-        val result = request()
+        val result = request.invoke()
         println(result)
         assertThat(result.message, `is`("success"))
-        assertThat(result.number.toInt(), `is`(greaterThanOrEqualTo(0)))
+        assertThat(result.number, `is`(greaterThanOrEqualTo(0)))
         assertThat(result.people.size, `is`(result.number.toInt()))
     }
 }
