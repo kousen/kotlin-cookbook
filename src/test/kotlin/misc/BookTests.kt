@@ -25,6 +25,7 @@ import java.time.LocalDate
 import java.time.Month
 import kotlin.math.exp
 
+@Suppress("UNUSED_VARIABLE")
 internal class BookTests {
     private val books = arrayOf(
         Book("1935182943", "Making Java Groovy", "Ken Kousen", LocalDate.parse("2013-09-30")),
