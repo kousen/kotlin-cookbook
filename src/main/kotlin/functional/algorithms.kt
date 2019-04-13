@@ -1,7 +1,6 @@
 package functional
 
 import java.math.BigInteger
-import kotlin.math.absoluteValue
 
 @JvmOverloads
 tailrec fun fibonacci(n: Int, a: Int = 0, b: Int = 1): Int =
@@ -21,5 +20,7 @@ tailrec fun factorial(
     when (n) {
         0L -> BigInteger.ONE
         1L -> acc
-        else -> factorial(n - 1, acc.multiply(BigInteger.valueOf(n)))
+        else -> factorial(n - 1, acc * BigInteger.valueOf(n))
     }
+
+fun BigInteger.length() = Math.log10(this.toDouble()).toLong() + 1
