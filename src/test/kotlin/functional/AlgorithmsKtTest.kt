@@ -2,10 +2,7 @@ package functional
 
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
-import org.junit.jupiter.api.DynamicTest
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestFactory
-import org.junit.jupiter.api.assertAll
+import org.junit.jupiter.api.*
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
@@ -21,6 +18,7 @@ internal class AlgorithmsKtTest {
         10 to 55)
 
     companion object {
+        // needed if parameterized test done with Lifecycle.PER_METHOD
         @JvmStatic
         fun fibs() = listOf(
             Arguments.of(1, 1), Arguments.of(2, 1),
@@ -30,17 +28,12 @@ internal class AlgorithmsKtTest {
             Arguments.of(9, 34), Arguments.of(10, 55))
     }
 
-    @ParameterizedTest(name = "fibonacci({0}) == {1}")
-    @MethodSource("fibs")
-    fun `first 10 Fibonacci numbers (method)`(n: Int, fib: Int) =
-        assertThat(fibonacci(n), `is`(fib))
-
-    @ParameterizedTest
-    @CsvSource("1, 1", "2, 1", "3, 2",
-        "4, 3", "5, 5", "6, 8", "7, 13",
-        "8, 21", "9, 34", "10, 55")
-    fun `first 10 Fibonacci numbers (csv)`(n: Int, fib: Int) =
-        assertThat(fibonacci(n), `is`(fib))
+    private fun fibnumbers() = listOf(
+        Arguments.of(1, 1), Arguments.of(2, 1),
+        Arguments.of(3, 2), Arguments.of(4, 3),
+        Arguments.of(5, 5), Arguments.of(6, 8),
+        Arguments.of(7, 13), Arguments.of(8, 21),
+        Arguments.of(9, 34), Arguments.of(10, 55))
 
     @Test
     internal fun `Fibonacci numbers (explicit)`() {
@@ -59,15 +52,43 @@ internal class AlgorithmsKtTest {
             }
         }
 
+    @ParameterizedTest(name = "fibonacci({0}) == {1}")
+    @MethodSource("fibs")
+    fun `first 10 Fibonacci numbers (companion method)`(n: Int, fib: Int) =
+        assertThat(fibonacci(n), `is`(fib))
+
+    @ParameterizedTest(name = "fibonacci({0}) == {1}")
+    @MethodSource("fibnumbers")
+    fun `first 10 Fibonacci numbers (instance method)`(n: Int, fib: Int) =
+        assertThat(fibonacci(n), `is`(fib))
+
+    @ParameterizedTest
+    @CsvSource("1, 1", "2, 1", "3, 2",
+        "4, 3", "5, 5", "6, 8", "7, 13",
+        "8, 21", "9, 34", "10, 55")
+    fun `first 10 Fibonacci numbers (csv)`(n: Int, fib: Int) =
+        assertThat(fibonacci(n), `is`(fib))
+
     @Test
     internal fun `factorial tests`() {
         assertAll(
             { assertThat(factorial(0), `is`(BigInteger.ONE)) },
             { assertThat(factorial(1), `is`(BigInteger.ONE)) },
-            { assertThat(factorial(2), `is`(BigInteger.valueOf(2L))) },
-            { assertThat(factorial(5), `is`(BigInteger.valueOf(120L))) },
+            { assertThat(factorial(2), `is`(BigInteger.valueOf(2))) },
+            { assertThat(factorial(5), `is`(BigInteger.valueOf(120))) },
             { assertThat(factorial(15000).toString().length, `is`(56130)) },
             { assertThat(factorial(75000).toString().length, `is`(333061)) }
+        )
+    }
+
+    @Test
+    internal fun `check recursive factorial`() {
+        assertAll(
+            { assertThat(recursiveFactorial(0), `is`(BigInteger.ONE)) },
+            { assertThat(recursiveFactorial(1), `is`(BigInteger.ONE)) },
+            { assertThat(recursiveFactorial(2), `is`(BigInteger.valueOf(2))) },
+            { assertThat(recursiveFactorial(5), `is`(BigInteger.valueOf(120))) },
+            { assertThrows<StackOverflowError> { recursiveFactorial(8000) }}
         )
     }
 }

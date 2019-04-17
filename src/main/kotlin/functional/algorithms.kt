@@ -4,19 +4,20 @@ import java.math.BigInteger
 
 @JvmOverloads
 tailrec fun fibonacci(n: Int, a: Int = 0, b: Int = 1): Int =
-    if (n == 1) b else fibonacci(n - 1, b, a + b)
+        when (n) {
+            0 -> a
+            1 -> b
+            else -> fibonacci(n - 1, b, a + b)
+        }
 
-//        when (n) {
-//            0 -> a
-//            1 -> b
-//            else -> fibonacci(n - 1, b, a + b)
-//        }
+fun recursiveFactorial(n: Long): BigInteger =
+    when (n) {
+        0L, 1L -> BigInteger.ONE
+        else -> BigInteger.valueOf(n) * recursiveFactorial(n - 1)
+    }
 
 @JvmOverloads
-tailrec fun factorial(
-    n: Long,
-    acc: BigInteger = BigInteger.ONE
-): BigInteger =
+tailrec fun factorial(n: Long, acc: BigInteger = BigInteger.ONE): BigInteger =
     when (n) {
         0L -> BigInteger.ONE
         1L -> acc
