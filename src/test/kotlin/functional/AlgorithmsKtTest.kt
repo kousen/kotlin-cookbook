@@ -3,11 +3,13 @@ package functional
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.junit.jupiter.api.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.MethodSource
 import java.math.BigInteger
+import java.util.stream.Stream
 
 @Suppress("unused")
 internal class AlgorithmsKtTest {
@@ -69,7 +71,29 @@ internal class AlgorithmsKtTest {
     fun `first 10 Fibonacci numbers (csv)`(n: Int, fib: Int) =
         assertThat(fibonacci(n), `is`(fib))
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("fibonacciTestData")
+    fun `check fibonacci using data class`(data: FibonacciTestData) {
+        assertThat(fibonacci(data.number), `is`(data.expected))
+    }
+
+    private fun fibonacciTestData() = Stream.of(
+        FibonacciTestData(number = 1, expected = 1),
+        FibonacciTestData(number = 2, expected = 1),
+        FibonacciTestData(number = 3, expected = 2),
+        FibonacciTestData(number = 4, expected = 3),
+        FibonacciTestData(number = 5, expected = 5),
+        FibonacciTestData(number = 6, expected = 8),
+        FibonacciTestData(number = 7, expected = 13)
+    )
+
+    @ParameterizedTest
+    @MethodSource("fibonacciTestData")
+    fun `check fibonacci with fold`(data: FibonacciTestData) {
+        assertThat(fibonacciFold(data.number), `is`(data.expected))
+    }
+
+    @Test @Disabled("slow")
     internal fun `factorial tests`() {
         assertAll(
             { assertThat(factorial(0), `is`(BigInteger.ONE)) },
@@ -91,4 +115,46 @@ internal class AlgorithmsKtTest {
             { assertThrows<StackOverflowError> { recursiveFactorial(8000) }}
         )
     }
+
+    @Test @Disabled("slow")
+    internal fun `folding factorial tests`() {
+        assertAll(
+            { assertThat(factorialFold(0), `is`(BigInteger.ONE)) },
+            { assertThat(factorialFold(1), `is`(BigInteger.ONE)) },
+            { assertThat(factorialFold(2), `is`(BigInteger.valueOf(2))) },
+            { assertThat(factorialFold(5), `is`(BigInteger.valueOf(120))) },
+            { assertThat(factorialFold(15000).toString().length, `is`(56130)) },
+            { assertThat(factorialFold(75000).toString().length, `is`(333061)) }
+        )
+    }
+
+    @Test
+    internal fun `sum using fold`() {
+        val numbers = intArrayOf(3, 1, 4, 1, 5, 9)
+        assertEquals(numbers.sum(), sum(*numbers))
+    }
+
+    @Test
+    internal fun `sum using fold with trace`() {
+        val numbers = intArrayOf(3, 1, 4, 1, 5, 9)
+        assertEquals(numbers.sum(), sumWithTrace(*numbers))
+    }
+
+    @Test
+    internal fun `sum using reduce`() {
+        val numbers = intArrayOf(3, 1, 4, 1, 5, 9)
+        assertAll(
+            { assertEquals(numbers.sum(), sumReduce(*numbers)) },
+            { assertThrows<UnsupportedOperationException> { sumReduce() }}
+        )
+    }
+
+    @Test
+    internal fun `sum using reduce doubles`() {
+        val numbers = intArrayOf(3, 1, 4, 1, 5, 9)
+        // first value is not doubled!
+        assertEquals(numbers.sum() * 2 - 3, sumReduceDoubles(*numbers))
+    }
 }
+
+data class FibonacciTestData(val number: Int, val expected: Int)
