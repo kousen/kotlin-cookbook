@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 public class TryWithResourcesDemo {
     public static void main(String[] args) throws IOException {
-        String path = "src/main/resources/book_data.csv";
+        String path = "src/scripts.main/resources/book_data.csv";
 
         File file = new File(path);
         String line = null;

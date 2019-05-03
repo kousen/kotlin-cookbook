@@ -4,10 +4,18 @@ plugins {
     `java-library`
     kotlin("jvm") version "1.3.31"
     id("me.champeau.gradle.jmh") version "0.4.8"
+    id("com.palantir.graal") version "0.3.0-25-g65a27de"
 }
 
 group = "com.kousenit"
 version = "1.0-SNAPSHOT"
+
+val scriptname: String by project  // read value from gradle.properties
+
+graal {
+    mainClass("scripts.${scriptname.capitalize()}Kt")
+    outputName(scriptname)     // output is build/graal/${scriptname}
+}
 
 repositories {
     jcenter()

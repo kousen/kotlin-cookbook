@@ -3,7 +3,7 @@ package misc
 import java.io.FileReader
 
 fun extractData(
-    fileName: String = "src/main/resources/annual_csv.csv",
+    fileName: String = "src/scripts.main/resources/annual_csv.csv",
     category: String = "GISTEMP"
 ) = FileReader(fileName).useLines { lines ->
     // Sequence<String>

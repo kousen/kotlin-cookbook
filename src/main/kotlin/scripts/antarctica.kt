@@ -3,7 +3,7 @@ package scripts
 import java.time.Instant
 import java.time.ZoneId
 
-fun main(args: Array<String>) {
+fun main() {
 
     val regex = """.*Antarctica.*""".toRegex()
     val instant = Instant.now()
@@ -23,6 +23,6 @@ fun main(args: Array<String>) {
     val southPole = instant.atZone(ZoneId.of("Antarctica/South_Pole"))
     val dst = southPole.zone.rules.isDaylightSavings(Instant.now())
     println("It is ${southPole.toLocalTime()} (UTC${southPole.offset}) at the South Pole")
-    println("The South Pole ${if (dst) "is" else "is not"} on Daylight Savings Time")
+    println("The South Pole ${if (dst) "is" else "is not"} currently on Daylight Savings Time")
 }
 
