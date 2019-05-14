@@ -7,7 +7,7 @@ internal class FileIOTest {
 
     @Test
     fun `size of book_data csv file is 226`() {
-        assertEquals(226, getSize("src/scripts.main/resources/book_data.csv"))
+        assertEquals(226, getSize("src/main/resources/book_data.csv"))
     }
 
     @Test
