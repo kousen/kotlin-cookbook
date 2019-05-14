@@ -31,7 +31,6 @@ dependencies {
 
     testImplementation("org.hamcrest:hamcrest:2.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
-
     testImplementation("junit:junit:4.12")
 }
 

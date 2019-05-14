@@ -2,6 +2,8 @@ package io
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.EnabledOnOs
+import org.junit.jupiter.api.condition.OS
 
 internal class FileIOTest {
 
@@ -10,12 +12,12 @@ internal class FileIOTest {
         assertEquals(226, getSize("src/main/resources/book_data.csv"))
     }
 
-    @Test
+    @Test @EnabledOnOs(OS.MAC)
     internal fun `10 longest words in dictionary`() {
         get10LongestWordsInDictionary().forEach { word -> println("$word (${word.length})") }
     }
 
-    @Test
+    @Test @EnabledOnOs(OS.MAC)
     internal fun `group by length in dictionary`() {
         groupByLength().forEach(::println)
     }
