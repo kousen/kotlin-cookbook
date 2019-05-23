@@ -4,7 +4,7 @@ plugins {
     `java-library`
     kotlin("jvm") version "1.3.31"
     id("me.champeau.gradle.jmh") version "0.4.8"
-    id("com.palantir.graal") version "0.3.0-25-g65a27de"
+    id("com.palantir.graal") version "0.3.0-29-gf737c91"
 }
 
 group = "com.kousenit"
@@ -30,7 +30,7 @@ dependencies {
     implementation("commons-validator:commons-validator:1.6")
 
     testImplementation("org.hamcrest:hamcrest:2.1")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
     testImplementation("junit:junit:4.12")
 }
 
