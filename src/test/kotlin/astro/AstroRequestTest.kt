@@ -14,6 +14,6 @@ internal class AstroRequestTest {
         println(result)
         assertThat(result.message, `is`("success"))
         assertThat(result.number, `is`(greaterThanOrEqualTo(0)))
-        assertThat(result.people.size, `is`(result.number.toInt()))
+        assertThat(result.people.size, `is`(result.number))
     }
 }
