@@ -42,7 +42,7 @@ class FilteringTests {
     internal fun `filtering to a typed collection`() {
         val list = listOf("a", LocalDate.now(), 3, 1, 4, "b")
 
-        val all = list.filterIsInstanceTo(mutableListOf())
+        val all = list.filterIsInstanceTo(mutableListOf<Any>())
         val strings = list.filterIsInstanceTo(mutableListOf<String>())
         val ints = list.filterIsInstanceTo(mutableListOf<Int>())
         val dates = list.filterIsInstanceTo(mutableListOf<LocalDate>())

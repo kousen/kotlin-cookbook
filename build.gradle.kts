@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import sun.jvmstat.monitor.MonitoredVmUtil.mainClass
 
 plugins {
     `java-library`
@@ -32,6 +33,7 @@ dependencies {
     testImplementation("org.hamcrest:hamcrest:2.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
     testImplementation("junit:junit:4.12")
+    compile(kotlin("script-runtime"))
 }
 
 java {
