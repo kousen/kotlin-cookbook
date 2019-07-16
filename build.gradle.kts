@@ -1,9 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import sun.jvmstat.monitor.MonitoredVmUtil.mainClass
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.40"
+    kotlin("jvm") version "1.3.41"
     id("me.champeau.gradle.jmh") version "0.4.8"
     id("com.palantir.graal") version "0.3.0-29-gf737c91"
 }

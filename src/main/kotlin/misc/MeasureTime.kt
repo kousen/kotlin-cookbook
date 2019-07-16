@@ -1,7 +1,7 @@
 package misc
 
 import java.util.stream.IntStream
-import kotlin.system.measureNanoTime
+
 import kotlin.system.measureTimeMillis
 
 fun doubleIt(x: Int): Int {
