@@ -25,6 +25,7 @@ data class Assignment(
     val name: String
 )
 
+// NOTE: Does not use AstroRequest at all; see AstroRequestTest for that
 fun main() {
     val result = Gson().fromJson(
         URL("http://api.open-notify.org/astros.json").readText(),

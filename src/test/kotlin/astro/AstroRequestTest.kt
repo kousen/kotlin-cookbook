@@ -10,7 +10,7 @@ internal class AstroRequestTest {
 
     @Test
     internal fun `get people in space`() {
-        val result = request.invoke()
+        val result = request()
         println(result)
         assertThat(result.message, `is`("success"))
         assertThat(result.number, `is`(greaterThanOrEqualTo(0)))
