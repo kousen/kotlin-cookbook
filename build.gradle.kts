@@ -30,7 +30,7 @@ dependencies {
     implementation("commons-validator:commons-validator:1.6")
 
     testImplementation("org.hamcrest:hamcrest:2.1")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.5.0")
     testImplementation("junit:junit:4.12")
     compile(kotlin("script-runtime"))
 }
@@ -42,7 +42,9 @@ java {
 
 tasks {
     test {
-        useJUnitPlatform()
+        useJUnitPlatform {
+            maxParallelForks = 4
+        }
     }
 }
 
