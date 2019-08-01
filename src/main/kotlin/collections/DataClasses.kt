@@ -2,9 +2,11 @@ package collections
 
 import java.time.LocalDate
 
-data class Product(val name: String,
-                   var price: Double,
-                   var onSale: Boolean = false)
+data class Product(
+    val name: String,
+    var price: Double,
+    var onSale: Boolean = false
+)
 
 data class Book(
     val isbn: String,
@@ -33,3 +35,4 @@ fun createMultiAuthorBook(
     authors: List<String> = listOf("Dimitry Jeremov", "Svetlana Isokova"),
     published: LocalDate = LocalDate.parse("2017-08-26")
 ) = MultiAuthorBook(isbn, title, authors, published)
+

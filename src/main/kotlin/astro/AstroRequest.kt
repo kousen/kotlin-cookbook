@@ -8,10 +8,8 @@ class AstroRequest {
         private const val ASTRO_URL = "http://api.open-notify.org/astros.json"
     }
 
-    operator fun invoke(): AstroResult {
-        val responseString = URL(ASTRO_URL).readText()
-        return Gson().fromJson(responseString, AstroResult::class.java)
-    }
+    operator fun invoke(): AstroResult =
+        Gson().fromJson(URL(ASTRO_URL).readText(), AstroResult::class.java)
 }
 
 data class AstroResult(
@@ -25,14 +23,22 @@ data class Assignment(
     val name: String
 )
 
+data class Astronaut(val name: String)
+
 // NOTE: Does not use AstroRequest at all; see AstroRequestTest for that
 fun main() {
-    val result = Gson().fromJson(
+    Gson().fromJson(
         URL("http://api.open-notify.org/astros.json").readText(),
-        AstroResult::class.java)
-    println("There are ${result.number} people in space:")
-    result.people.forEach { astronaut ->
-        println("\t${astronaut.name} aboard ${astronaut.craft}")
+        AstroResult::class.java
+    ).also { astroResult ->
+        println("There are ${astroResult.number} people in space:")
+        astroResult.people.forEach { assignment ->
+            println("\t${assignment.name} aboard ${assignment.craft}")
+        }
+    }.let { astroResult ->
+        astroResult.people.map { it.name }
+    }.also {
+        println(it)
     }
 }
 

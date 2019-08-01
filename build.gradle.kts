@@ -43,7 +43,7 @@ java {
 tasks {
     test {
         useJUnitPlatform {
-            maxParallelForks = 4
+            maxParallelForks = Runtime.getRuntime().availableProcessors() / 2
         }
     }
 }

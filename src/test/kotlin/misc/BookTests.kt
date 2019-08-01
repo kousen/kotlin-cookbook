@@ -23,6 +23,7 @@ import org.junit.jupiter.params.provider.CsvFileSource
 import org.junit.jupiter.params.provider.CsvSource
 import java.time.LocalDate
 import java.time.Month
+import java.util.logging.Logger
 import kotlin.math.exp
 
 @Suppress("UNUSED_VARIABLE")
@@ -150,5 +151,12 @@ internal class BookTests {
                 assertTrue(book.author::isNotBlank)
             }
         }.toList()
+    }
+
+    @Test
+    internal fun `use also for printing`() {
+        val book = createBook()
+            .also { println(it) }
+            .also { Logger.getAnonymousLogger().info(it.toString()) }
     }
 }
