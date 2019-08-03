@@ -20,8 +20,8 @@ class Camera : Snappable {
 
 class SmartPhone(
     private val phone: Dialable = Phone(),
-    private val camera: Snappable = Camera()) :
-    Dialable by phone, Snappable by camera
+    private val camera: Snappable = Camera()
+) : Dialable by phone, Snappable by camera
 
 fun main() {
     val myPhone = SmartPhone()
