@@ -3,7 +3,7 @@ package misc
 import java.io.FileReader
 
 fun extractData(
-    fileName: String = "src/scripts.main/resources/annual_csv.csv",
+    fileName: String = "src/main/resources/annual_csv.csv",
     category: String = "GISTEMP"
 ) = FileReader(fileName).useLines { lines ->
     // Sequence<String>
@@ -33,7 +33,7 @@ fun getWindowedAverages(data: Map<Int, Double>, size: Int, step: Int = 1) =
         }
 
 
-fun main(args: Array<String>) {
+fun main() {
     getChunkedAverages(extractData(), 9).forEach { println(it) }
     getWindowedAverages(extractData(), 9, 5).forEach { println(it) }
 }

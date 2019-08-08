@@ -16,8 +16,8 @@ fun main(args: Array<String>) {
     val widget = Product("Oscillation Overthruster", 10.0)
     val tpsReportCoverSheet = Product("TPS Report Cover Sheet",
         0.25, true)
-    val handPhaser = Product("Flux Capacitor", 29.95)
-    val products = listOf(widget, tpsReportCoverSheet, handPhaser)
+    val fluxCapacitor = Product("Flux Capacitor", 29.95)
+    val products = listOf(widget, tpsReportCoverSheet, fluxCapacitor)
     println(onSaleProducts_ifEmptyCollection(products))
 
     tpsReportCoverSheet.onSale = false
