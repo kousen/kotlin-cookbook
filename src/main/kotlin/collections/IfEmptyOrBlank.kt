@@ -7,15 +7,16 @@ fun onSaleProducts_ifEmptyCollection(products: List<Product>) =
         .joinToString(separator = ", ")
 
 fun onSaleProducts_ifEmptyString(products: List<Product>) =
-        products.filter { it.onSale }
-            .map { it.name }
-            .joinToString(separator = ", ")
-            .ifEmpty { "none" }
+    products.filter { it.onSale }
+        .joinToString(separator = ", ") { it.name }
+        .ifEmpty { "none" }
 
-fun main(args: Array<String>) {
+fun main() {
     val widget = Product("Oscillation Overthruster", 10.0)
-    val tpsReportCoverSheet = Product("TPS Report Cover Sheet",
-        0.25, true)
+    val tpsReportCoverSheet = Product(
+        "TPS Report Cover Sheet",
+        0.25, true
+    )
     val fluxCapacitor = Product("Flux Capacitor", 29.95)
     val products = listOf(widget, tpsReportCoverSheet, fluxCapacitor)
     println(onSaleProducts_ifEmptyCollection(products))

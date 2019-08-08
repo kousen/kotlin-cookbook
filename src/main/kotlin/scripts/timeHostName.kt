@@ -8,5 +8,5 @@ fun main() {
     val time = measureTimeMillis {
         hostName = InetAddress.getLocalHost().hostName
     }
-    println("Accessing $hostName takes ${time} ms")
+    println("Accessing $hostName takes $time ms")
 }

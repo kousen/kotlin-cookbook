@@ -7,8 +7,8 @@ fun extractData(
     category: String = "GISTEMP"
 ) = FileReader(fileName).useLines { lines ->
     // Sequence<String>
-    lines.drop(3)                                // skip header lines
-        .map { line -> line.split(",") } // Sequence<String[]>
+    lines.drop(3)                                  // skip header lines
+        .map { line -> line.split(",") }           // Sequence<String[]>
         .filter { it[0] == category }
         .sortedBy { it[1] }                        // sort by year
         .map { it[1].toInt() to it[2].toDouble() } // Sequence<Pair<Int,Double>>
@@ -34,6 +34,7 @@ fun getWindowedAverages(data: Map<Int, Double>, size: Int, step: Int = 1) =
 
 
 fun main() {
-    getChunkedAverages(extractData(), 9).forEach { println(it) }
-    getWindowedAverages(extractData(), 9, 5).forEach { println(it) }
+    getChunkedAverages(extractData(),  10).forEach { println(it) }
+    println()
+    getWindowedAverages(extractData(), 10, 5).forEach { println(it) }
 }

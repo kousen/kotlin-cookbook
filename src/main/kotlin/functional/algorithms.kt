@@ -22,11 +22,11 @@ fun sumReduceDoubles(vararg nums: Int) =
 
 @JvmOverloads
 tailrec fun fibonacci(n: Int, a: Int = 0, b: Int = 1): Int =
-        when (n) {
-            0 -> a
-            1 -> b
-            else -> fibonacci(n - 1, b, a + b)
-        }
+    when (n) {
+        0 -> a
+        1 -> b
+        else -> fibonacci(n - 1, b, a + b)
+    }
 
 fun fibonacciFold(n: Int) =
     (2 until n).fold(1 to 1) { (prev, curr), _ -> curr to (prev + curr) }.second
@@ -39,11 +39,12 @@ fun recursiveFactorial(n: Long): BigInteger =
     }
 
 fun factorialFold(n: Long): BigInteger =
-        when(n) {
-            0L, 1L -> BigInteger.ONE
-            else -> (2..n).fold(BigInteger.ONE) { acc, i ->
-                acc * BigInteger.valueOf(i) }
+    when (n) {
+        0L, 1L -> BigInteger.ONE
+        else -> (2..n).fold(BigInteger.ONE) { acc, i ->
+            acc * BigInteger.valueOf(i)
         }
+    }
 
 @JvmOverloads
 tailrec fun factorial(n: Long, acc: BigInteger = BigInteger.ONE): BigInteger =

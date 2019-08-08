@@ -1,6 +1,6 @@
 package collections
 
-fun main(args: Array<String>) {
+fun main() {
     val list = 0..10
     val pieces = list.chunked(3)
     println(pieces)

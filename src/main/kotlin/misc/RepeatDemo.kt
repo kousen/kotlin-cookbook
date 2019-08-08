@@ -1,6 +1,6 @@
 package misc
 
-fun main(args: Array<String>) {
+fun main() {
     repeat(5) {
         println("Counting: $it")
     }
