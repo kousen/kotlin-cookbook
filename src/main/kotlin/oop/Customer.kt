@@ -2,7 +2,15 @@ package oop
 
 class Customer(val name: String) {
 
-// Version 1:
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        val otherCustomer = (other as? Customer) ?: return false
+        return this.name == otherCustomer.name
+    }
+
+    override fun hashCode() = name.hashCode()
+
+    // Version 1:
     private var _messages: List<String>? = null
 
     val messages: List<String>
@@ -22,4 +30,7 @@ class Customer(val name: String) {
             "Convinced them to use Kotlin",
             "Sold training class. Sweet."
         ).also { println("Loaded messages") }
+
+
+
 }

@@ -1,5 +1,5 @@
 package misc
 
-fun main(args: Array<String>) {
+fun main() {
     println("The current Kotlin version is ${KotlinVersion.CURRENT}")
 }
