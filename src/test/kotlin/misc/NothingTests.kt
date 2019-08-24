@@ -2,9 +2,9 @@
 
 package misc
 
-import org.junit.Ignore
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.random.Random
@@ -25,7 +25,7 @@ class NothingTests {
     }
 
     @Suppress("UNUSED_VARIABLE")
-    @Test @Ignore("randomly throws exception (on purpose)")
+    @Test @Disabled("randomly throws exception (on purpose)")
     internal fun `if with exception`() {
         val x: String = if (Random.nextBoolean()) "true" else throw Exception("nope")
     }

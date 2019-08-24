@@ -3,8 +3,11 @@ package collections
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.contains
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import java.time.LocalDate
 
 class RangeTests {
     @Test
@@ -12,8 +15,8 @@ class RangeTests {
         val range = 3..8
 
         assertThat(5, `is`(5.coerceIn(range)))
-        assertThat(range.start, `is`(1.coerceIn(range)))
-        assertThat(range.endInclusive, `is`(9.coerceIn(range)))
+        assertThat(range.first, `is`(1.coerceIn(range)))
+        assertThat(range.last, `is`(9.coerceIn(range)))
     }
 
     @Test
@@ -71,4 +74,51 @@ class RangeTests {
                     contains(1.0, 4.0, 7.0))
             })
     }
+
+    @Test
+    internal fun `LocalDate in a range`() {
+        val startDate = LocalDate.now()
+        val midDate = startDate.plusDays(3)
+        val endDate = startDate.plusDays(5)
+
+        val dateRange = startDate..endDate
+
+        assertAll(
+            { assertTrue(startDate in dateRange) },
+            { assertTrue(midDate in dateRange) },
+            { assertTrue(endDate in dateRange) },
+            { assertTrue(startDate.minusDays(1) !in dateRange) },
+            { assertTrue(endDate.plusDays(1) !in dateRange) }
+        )
+    }
+
+    @Test
+    internal fun `use LocalDate as a progression`() {
+        val startDate = LocalDate.now()
+        val endDate = startDate.plusDays(5)
+
+        val dateRange = startDate..endDate
+
+        dateRange.forEachIndexed { index, localDate ->
+            assertEquals(localDate, startDate.plusDays(index.toLong()))
+        }
+
+        val dateList = dateRange.map { it.toString() }
+        assertEquals(6, dateList.size)
+    }
+
+    @Test
+    internal fun `use LocalDate as a progression with a step`() {
+        val startDate = LocalDate.now()
+        val endDate = startDate.plusDays(5)
+
+        val dateRange = startDate..endDate step 2
+        dateRange.forEachIndexed { index, localDate ->
+            assertEquals(localDate, startDate.plusDays(index.toLong() * 2))
+        }
+
+        val dateList = dateRange.map { it.toString() }
+        assertEquals(3, dateList.size)
+    }
+
 }
