@@ -16,3 +16,11 @@ fun firstNPrimes(count: Int) =
         .take(count)
         .toList()
 
+fun primesLessThan(max: Int): List<Int> =
+//    generateSequence(2) { n -> if (n < max) nextPrime(n) else null }
+//        .toList().dropLast(1)
+    generateSequence(2, ::nextPrime)
+        .takeWhile { it < max }
+        .toList()
+
+
