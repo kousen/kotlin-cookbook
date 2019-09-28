@@ -9,7 +9,7 @@ import java.time.format.FormatStyle
 import java.util.*
 
 data class IssPosition(val latitude: Double,
-                        val longitude: Double)
+                       val longitude: Double)
 
 data class Response(val message: String,
                     val iss_position: IssPosition,
@@ -28,8 +28,9 @@ class ProcessAstroData {
 
     fun getPosition() =
         gson.fromJson(URL(url).readText(), Response::class.java)
-            .also { println("Response as of " +
-             it.getZDT().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))) }
+            .also(::println)
+//            .also { println("Response as of " +
+//             it.getZDT().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))) }
             .iss_position
 }
 
