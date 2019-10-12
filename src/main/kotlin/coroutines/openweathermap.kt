@@ -97,6 +97,13 @@ data class Model(
     private val speed
         get() = convertSpeed(wind.speed)
 
+    fun simpleString(): String =
+        """
+            $name
+                Current: ${NumberFormat.getInstance().format(temperature)} F"
+                High: $high F, Low: $low F
+        """.trimIndent()
+
     override fun toString(): String {
         val df = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
         val nf = NumberFormat.getNumberInstance()
@@ -133,12 +140,6 @@ class OpenWeatherMap {
     }
 }
 
-suspend fun getWeatherForZip(owm: OpenWeatherMap, zip: String) =
-    withContext(Dispatchers.IO) {
-        owm.getWeather(zip)
-    }
-
-
 suspend fun main() {
     val owm = OpenWeatherMap()
     val zips = listOf("06447", "96801", "02115")
@@ -155,10 +156,10 @@ suspend fun main() {
     measureTimeMillis {
         coroutineScope {
             zips.map { zip ->
-                launch {
-                    println(getWeatherForZip(owm, zip))
+                withContext(Dispatchers.IO) {
+                    owm.getWeather(zip)
                 }
-            }
+            }.forEach{ println(it.simpleString()) }
         }
     }.also {
         println("Elapsed time (asynchronous): $it ms")
