@@ -139,26 +139,28 @@ suspend fun getWeatherForZip(owm: OpenWeatherMap, zip: String) =
     }
 
 
-fun main() {
+suspend fun main() {
     val owm = OpenWeatherMap()
     val zips = listOf("06447", "96801", "02115")
     // synchronous
-    val timeSync = measureTimeMillis {
+    measureTimeMillis {
         zips.forEach {
-            println(owm.getWeather(it).name)
+            owm.getWeather(it)
         }
+    }.also {
+        println("Elapsed time (synchronous) : $it ms")
     }
-    println("Elapsed time (synchronous) : $timeSync ms")
 
     // asynchronous
-    val timeAsync = measureTimeMillis {
-        runBlocking {
+    measureTimeMillis {
+        coroutineScope {
             zips.map { zip ->
                 launch {
-                    println(getWeatherForZip(owm, zip).name)
+                    println(getWeatherForZip(owm, zip))
                 }
-            }.joinAll()
+            }
         }
+    }.also {
+        println("Elapsed time (asynchronous): $it ms")
     }
-    println("Elapsed time (asynchronous): $timeAsync ms")
 }
