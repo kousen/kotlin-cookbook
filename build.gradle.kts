@@ -27,11 +27,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.1")
 
     implementation("org.apache.commons:commons-math3:3.6.1")
-    implementation("com.google.code.gson:gson:2.8.5")
+    implementation("com.google.code.gson:gson:2.8.6")
     implementation("commons-validator:commons-validator:1.6")
 
     testImplementation("org.hamcrest:hamcrest:2.1")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.5.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.5.2")
     testImplementation("junit:junit:4.12")
     implementation(kotlin("script-runtime"))
 }
