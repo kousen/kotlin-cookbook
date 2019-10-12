@@ -25,4 +25,8 @@ class OpenWeatherMapTests {
         assertThat(model.convertSpeed(1.0), `is`(closeTo(2.23694, 0.00001)))
     }
 
+    @Test
+    internal fun `Is it always sunny in Philadelphia?`() {
+        println(owm.getWeather("19102"))
+    }
 }

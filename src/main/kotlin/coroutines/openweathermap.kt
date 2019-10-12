@@ -3,7 +3,9 @@ package coroutines
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 import java.net.URL
 import java.text.NumberFormat
 import java.time.Instant
@@ -13,7 +15,6 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import kotlin.math.ceil
 import kotlin.math.floor
-import kotlin.system.measureTimeMillis
 
 data class Clouds(
     val all: Double
@@ -110,6 +111,7 @@ data class Model(
 
         return """
             For ${name}, as of ${df.format(time)}:
+            Description  : ${weather[0].description}
             Icon         : http://openweathermap.org/img/w/${weather[0].icon}.png
             Current Temp : ${nf.format(temperature)} F (high: $high F, low: $low F)
             Humidity     : ${main.humidity}%
@@ -140,28 +142,38 @@ class OpenWeatherMap {
     }
 }
 
-suspend fun main() {
+fun syncZips(vararg zips: String): List<Model> {
     val owm = OpenWeatherMap()
-    val zips = listOf("06447", "96801", "02115")
-    // synchronous
-    measureTimeMillis {
-        zips.forEach {
-            owm.getWeather(it)
-        }
-    }.also {
-        println("Elapsed time (synchronous) : $it ms")
+    return zips.map { owm.getWeather(it) }
+}
+
+suspend fun asyncZips(vararg zips: String) = coroutineScope {
+    val owm = OpenWeatherMap()
+    withContext(Dispatchers.IO) {
+        zips.map { owm.getWeather(it) }
     }
+}
+
+inline fun <R> measureTimeAndReturn(block: () -> R): Pair<Long, R> {
+    val start = java.lang.System.currentTimeMillis()
+    val result = block()
+    val time = java.lang.System.currentTimeMillis() - start
+    return Pair(time, result)
+}
+
+suspend fun main() {
+    // synchronous
+    val (time, result) = measureTimeAndReturn {
+        syncZips("06447", "96801", "02115")
+    }
+    println("Elapsed time (sync): $time")
+    result.forEach { println(it.simpleString()) }
 
     // asynchronous
-    measureTimeMillis {
-        coroutineScope {
-            zips.map { zip ->
-                withContext(Dispatchers.IO) {
-                    owm.getWeather(zip)
-                }
-            }.forEach{ println(it.simpleString()) }
-        }
+    measureTimeAndReturn {
+        asyncZips("06447", "96801", "02115")
     }.also {
-        println("Elapsed time (asynchronous): $it ms")
+        println("Elapsed time (async): ${it.first} ms")
+        it.second.forEach { println(it.simpleString()) }
     }
 }
