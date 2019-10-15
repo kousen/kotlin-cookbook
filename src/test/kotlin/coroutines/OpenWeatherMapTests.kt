@@ -3,10 +3,8 @@ package coroutines
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.closeTo
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
-import java.time.*
 
 class OpenWeatherMapTests {
     private val owm = OpenWeatherMap()

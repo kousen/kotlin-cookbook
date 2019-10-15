@@ -5,7 +5,7 @@ import kotlinx.coroutines.runBlocking
 
 fun main() {
     println("Before creating coroutine")
-    runBlocking {
+    runBlocking<Unit> {
         print("Hello, ")
         delay(200L)
         println("World!")
