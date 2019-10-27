@@ -150,7 +150,10 @@ fun syncZips(vararg zips: String): List<Model> {
 suspend fun asyncZips(vararg zips: String) = coroutineScope {
     val owm = OpenWeatherMap()
     withContext(Dispatchers.IO) {
-        zips.map { owm.getWeather(it) }
+        zips.map {
+            println(Thread.currentThread().name + " for " + it)
+            owm.getWeather(it)
+        }
     }
 }
 
