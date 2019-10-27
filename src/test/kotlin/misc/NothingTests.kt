@@ -2,10 +2,10 @@
 
 package misc
 
-import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import kotlin.random.Random
 
@@ -25,21 +25,24 @@ class NothingTests {
     }
 
     @Suppress("UNUSED_VARIABLE")
-    @Test @Disabled("randomly throws exception (on purpose)")
+    @Test
+    @Disabled("randomly throws exception (on purpose)")
     internal fun `if with exception`() {
         val x: String = if (Random.nextBoolean()) "true" else throw Exception("nope")
     }
 
     @Test
     internal fun `remainder mod 3`() {
-        for (n in 1..10) {
-            val x = when (n % 3) {
-                0 -> "$n % 3 == 0"
-                1 -> "$n % 3 == 1"
-                2 -> "$n % 3 == 2"
-                else -> "Houston, we have a problem..."
+        assertDoesNotThrow("Never throws an exception") {
+            for (n in 1..10) {
+                val x = when (n % 3) {
+                    0 -> "$n % 3 == 0"
+                    1 -> "$n % 3 == 1"
+                    2 -> "$n % 3 == 2"
+                    else -> throw Exception("Houston, we have a problem...")
+                }
+                assertTrue(x is String)
             }
-            assertFalse(x == "Houston, we have a problem")
         }
     }
 }

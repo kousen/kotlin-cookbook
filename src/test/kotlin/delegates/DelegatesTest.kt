@@ -49,14 +49,14 @@ internal class DelegatesTest {
         val project = Project(
             mutableMapOf(
                 "name" to "Learn Kotlin",
-                "priorty" to 5,
+                "priority" to 5,
                 "completed" to true
             )
         )
 
         assertAll(
             { assertEquals("Learn Kotlin", project.name) },
-            { assertEquals(5, project.priorty) },
+            { assertEquals(5, project.priority) },
             { assertTrue(project.completed) }
         )
     }
@@ -66,13 +66,14 @@ internal class DelegatesTest {
         val project = Project(getMapFromJSON())
         assertAll(
             { assertEquals("Learn Kotlin", project.name) },
-            { assertEquals(5, project.priorty) },
+            { assertEquals(5, project.priority) },
             { assertTrue(project.completed) }
         )
     }
 
     private fun getMapFromJSON() =
         Gson().fromJson<MutableMap<String, Any?>>(
-            "{\"name\":\"Learn Kotlin\",\"priorty\":5,\"completed\":true}",
+            """{ "name":"Learn Kotlin", "priority":5, 
+                "completed":true }""",
             MutableMap::class.java)
 }

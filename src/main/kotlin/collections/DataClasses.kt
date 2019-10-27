@@ -32,7 +32,7 @@ data class MultiAuthorBook(
 fun createMultiAuthorBook(
     isbn: String = "9781617293290",
     title: String = "Kotlin in Action",
-    authors: List<String> = listOf("Dimitry Jeremov", "Svetlana Isokova"),
+    authors: List<String> = listOf("Dimitry Jeremov", "Svetlana Isakova"),
     published: LocalDate = LocalDate.parse("2017-08-26")
 ) = MultiAuthorBook(isbn, title, authors, published)
 

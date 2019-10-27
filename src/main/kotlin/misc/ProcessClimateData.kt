@@ -32,7 +32,6 @@ fun getWindowedAverages(data: Map<Int, Double>, size: Int, step: Int = 1) =
                     "%.2f".format(list.map { it.value }.average())
         }
 
-
 fun main() {
     getChunkedAverages(extractData(),  10).forEach { println(it) }
     println()
