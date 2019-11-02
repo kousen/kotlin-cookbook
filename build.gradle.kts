@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     `java-library`
     kotlin("jvm") version "1.3.50"
-    id("me.champeau.gradle.jmh") version "0.4.8"
-    id("com.palantir.graal") version "0.6.0-6-g964a3eb"
+    id("me.champeau.gradle.jmh") version "0.5.0"
+    id("com.palantir.graal") version "0.6.0-30-gade71a8"
 }
 
 group = "com.kousenit"
