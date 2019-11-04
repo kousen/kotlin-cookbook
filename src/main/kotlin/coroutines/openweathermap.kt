@@ -4,6 +4,7 @@ import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import java.net.URL
@@ -151,9 +152,12 @@ suspend fun asyncZips(vararg zips: String) = coroutineScope {
     val owm = OpenWeatherMap()
     withContext(Dispatchers.IO) {
         zips.map {
-            println(Thread.currentThread().name + " for " + it)
-            owm.getWeather(it)
+            async {
+                println(Thread.currentThread().name)
+                owm.getWeather(it)
+            }
         }
+            .map { it.await() }
     }
 }
 
