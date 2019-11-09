@@ -38,4 +38,11 @@ class KotlinVersionTests {
         assertTrue(KotlinVersion.CURRENT.isAtLeast(major = 1, minor = 3))
         assertTrue(KotlinVersion.CURRENT.isAtLeast(major = 1, minor = 3, patch = 40))
     }
+
+    @Test
+    internal fun `left-shift values for major, minor, and patch`() {
+        assertEquals(65536, 1 shl 16)
+        assertEquals(768, 3 shl 8)
+        assertEquals(66354, (1 shl 16) + (3 shl 8) + 50)
+    }
 }
