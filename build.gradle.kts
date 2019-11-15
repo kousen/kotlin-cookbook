@@ -2,13 +2,13 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.50"
+    kotlin("jvm") version "1.3.60"
     id("me.champeau.gradle.jmh") version "0.5.0"
     id("com.palantir.graal") version "0.6.0-30-gade71a8"
 }
 
 group = "com.kousenit"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 val scriptname: String by project  // read value from gradle.properties
 
@@ -24,13 +24,13 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
 
     implementation("org.apache.commons:commons-math3:3.6.1")
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("commons-validator:commons-validator:1.6")
 
-    testImplementation("org.hamcrest:hamcrest:2.1")
+    testImplementation("org.hamcrest:hamcrest:2.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.5.2")
     testImplementation("junit:junit:4.12")
     implementation(kotlin("script-runtime"))

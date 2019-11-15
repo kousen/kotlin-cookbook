@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
+@Suppress("USELESS_IS_CHECK")
 class SequenceTests {
     @Test
     internal fun `create a sequence from values`() {

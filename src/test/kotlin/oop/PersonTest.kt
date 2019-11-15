@@ -9,6 +9,7 @@ data class Person(
     val last: String
 )
 
+@Suppress("USELESS_IS_CHECK", "UNUSED_VARIABLE", "UNUSED_VALUE")
 class PersonTest {
     private val jkRowling = Person("Joanne", null, "Rowling")
 
@@ -19,7 +20,6 @@ class PersonTest {
 
     @Test
     fun `safe call operator`() {
-
         val p = Person(first = "North", middle = null, last = "West")
         var middleNameLength = p.middle?.length
         assertTrue(middleNameLength is Int?)
@@ -31,6 +31,7 @@ class PersonTest {
 
     @Test
     fun `not-null assertion operator`() {
+        @Suppress("CanBeVal")
         var p2 = Person(first = "North", middle = null, last = "West")
         if (p2.middle != null) {
             val middleNameLength = p2.middle!!.length  // ugh

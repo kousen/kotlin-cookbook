@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
+@Suppress("USELESS_IS_CHECK")
 public class ArrayTests {
     @Test
     internal fun `create with arrayOf`() {

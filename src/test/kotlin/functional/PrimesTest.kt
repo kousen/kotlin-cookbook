@@ -56,7 +56,7 @@ internal class PrimesTest {
 
     @Test
     internal fun `find all primes less than 20`() {
-        val primes = primesLessThan(20)
+        primesLessThan(20)
             .also(::println)
     }
 }
