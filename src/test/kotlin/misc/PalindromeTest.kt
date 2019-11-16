@@ -24,7 +24,7 @@ class PalindromeTest {
 
     @Test
     fun `not a palindrome (for extension function)`() {
-        assertFalse("this is not a palindrome". isPalindrome())
+        assertFalse("this is not a palindrome".isPalindrome())
     }
 
 
