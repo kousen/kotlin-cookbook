@@ -93,6 +93,12 @@ internal class AlgorithmsKtTest {
         assertThat(fibonacciFold(data.number), `is`(data.expected))
     }
 
+    @Test
+    fun `watch fibonacci fold in action`() {
+        val total = fibonacciFoldDebug(10)
+        println("Fib(10) == $total")
+    }
+
     @Test @Disabled("slow")
     internal fun `factorial tests`() {
         assertAll(
