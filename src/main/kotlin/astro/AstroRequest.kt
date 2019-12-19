@@ -23,8 +23,6 @@ data class Assignment(
     val name: String
 )
 
-data class Astronaut(val name: String)
-
 // NOTE: Does not use AstroRequest at all; see AstroRequestTest for that
 fun main() {
     Gson().fromJson(
@@ -35,6 +33,7 @@ fun main() {
         astroResult.people.forEach { assignment ->
             println("\t${assignment.name} aboard ${assignment.craft}")
         }
-    }.people.map { it.name }.also(::println)  // or use let instead of also
+    }.people.map { it.name }
+        .also(::println)  // or use let instead of also
 }
 

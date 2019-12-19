@@ -18,9 +18,8 @@ data class Response(
     val iss_position: IssPosition,
     val timestamp: Long
 ) {
-
-    fun getZDT(): ZonedDateTime =
-        ZonedDateTime.ofInstant(
+    val zdt: ZonedDateTime
+        get() = ZonedDateTime.ofInstant(
             Instant.ofEpochSecond(timestamp),
             TimeZone.getDefault().toZoneId()
         )
@@ -38,7 +37,7 @@ class ProcessAstroData {
     fun getPosition() =
         response.also {
             println(
-                "As of " + it.getZDT().format(
+                "As of " + it.zdt.format(
                     DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG)
                 )
             )
