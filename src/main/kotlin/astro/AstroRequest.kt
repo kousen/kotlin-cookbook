@@ -33,7 +33,7 @@ fun main() {
         astroResult.people.forEach { assignment ->
             println("\t${assignment.name} aboard ${assignment.craft}")
         }
-    }.people.map { it.name }
+    }.people.map(Assignment::name)
         .also(::println)  // or use let instead of also
 }
 

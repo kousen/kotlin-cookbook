@@ -13,7 +13,7 @@ data class IssPosition(
     val longitude: Double
 )
 
-data class Response(
+data class IssResponse(
     val message: String,
     val iss_position: IssPosition,
     val timestamp: Long
@@ -28,14 +28,13 @@ data class Response(
 class ProcessAstroData {
     companion object {
         const val url = "http://api.open-notify.org/iss-now.json"
-        val gson = Gson()
     }
 
-    val response
-        get() = gson.fromJson(URL(url).readText(), Response::class.java)
+    fun getResponse(): IssResponse =
+        Gson().fromJson(URL(url).readText(), IssResponse::class.java)
 
     fun getPosition() =
-        response.also {
+        getResponse().also {
             println(
                 "As of " + it.zdt.format(
                     DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG)

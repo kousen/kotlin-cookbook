@@ -32,7 +32,7 @@ class TimestampTest {
 
     @Test
     internal fun response() {
-        val (message, iss_position, timestamp) = ProcessAstroData().response
+        val (message, iss_position, timestamp) = ProcessAstroData().getResponse()
         assertAll(
             { assertEquals("success", message) },
             { assertTrue(iss_position.latitude <= 90 &&

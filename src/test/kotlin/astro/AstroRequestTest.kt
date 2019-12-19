@@ -6,11 +6,10 @@ import org.hamcrest.Matchers.greaterThanOrEqualTo
 import org.junit.jupiter.api.Test
 
 internal class AstroRequestTest {
-    val request = AstroRequest()
 
     @Test
     internal fun `get people in space`() {
-        val result = request()
+        val result = AstroRequest()()
         println(result)
         assertThat(result.message, `is`("success"))
         assertThat(result.number, `is`(greaterThanOrEqualTo(0)))

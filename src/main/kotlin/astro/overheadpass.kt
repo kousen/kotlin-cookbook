@@ -11,7 +11,7 @@ import java.util.*
 data class OverheadResponse(
     val message: String,
     val request: OverheadRequest,
-    val response: ArrayList<TimeAndDuration>
+    val response: List<TimeAndDuration>
 )
 
 data class OverheadRequest(
@@ -27,7 +27,20 @@ data class TimeAndDuration(
     val duration: Long
 )
 
-const val base = "http://api.open-notify.org/iss-pass.json"
+class Overhead {
+    companion object {
+        const val base = "http://api.open-notify.org/iss-pass.json"
+    }
+
+    fun getOverheadResponse(lat: Double,
+                            lng: Double,
+                            alt: Double = 0.0,
+                            num: Int = 5): OverheadResponse {
+        val url = "$base?lat=$lat&lon=$lng&alt=$alt&n=$num"
+        val json = URL(url).readText()
+        return Gson().fromJson(json, OverheadResponse::class.java)
+    }
+}
 
 fun formatTimestamp(timestamp: Long): String =
     ZonedDateTime.ofInstant(
@@ -37,15 +50,14 @@ fun formatTimestamp(timestamp: Long): String =
 
 fun main() {
     // Marlborough, CT
-//    val latitude = 41.6314
-//    val longitude = -72.4596
+    val latitude = 41.6314
+    val longitude = -72.4596
 
     // Portland, OR (sample response at http://open-notify.org/Open-Notify-API/)
-    val latitude = 45.0
-    val longitude = -122.3
+//    val latitude = 45.0
+//    val longitude = -122.3
 
-    val json = URL("$base?lat=$latitude&lon=$longitude").readText()
-    val output = Gson().fromJson(json, OverheadResponse::class.java)
+    val output = Overhead().getOverheadResponse(latitude, longitude)
     output.response.forEach {
         println(formatTimestamp(it.risetime))
     }
