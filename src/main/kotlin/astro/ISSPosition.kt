@@ -8,16 +8,22 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
 
-data class IssPosition(val latitude: Double,
-                       val longitude: Double)
+data class IssPosition(
+    val latitude: Double,
+    val longitude: Double
+)
 
-data class Response(val message: String,
-                    val iss_position: IssPosition,
-                    val timestamp: Long) {
+data class Response(
+    val message: String,
+    val iss_position: IssPosition,
+    val timestamp: Long
+) {
 
     fun getZDT(): ZonedDateTime =
-        ZonedDateTime.ofInstant(Instant.ofEpochSecond(timestamp),
-            TimeZone.getDefault().toZoneId())
+        ZonedDateTime.ofInstant(
+            Instant.ofEpochSecond(timestamp),
+            TimeZone.getDefault().toZoneId()
+        )
 }
 
 class ProcessAstroData {
@@ -26,16 +32,21 @@ class ProcessAstroData {
         val gson = Gson()
     }
 
+    val response
+        get() = gson.fromJson(URL(url).readText(), Response::class.java)
+
     fun getPosition() =
-        gson.fromJson(URL(url).readText(), Response::class.java)
-            .also(::println)
-//            .also { println("Response as of " +
-//             it.getZDT().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))) }
-            .iss_position
+        response.also {
+            println(
+                "As of " + it.getZDT().format(
+                    DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG)
+                )
+            )
+        }.iss_position
 }
 
 fun main() {
     val demo = ProcessAstroData()
-    val (lat,lng) = demo.getPosition()
+    val (lat, lng) = demo.getPosition()
     println("$lat deg N, $lng deg W")
 }
