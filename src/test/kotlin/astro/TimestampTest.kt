@@ -18,7 +18,7 @@ class TimestampTest {
         val timestamp: Long = 1576721287
         val zdt = ZonedDateTime.ofInstant(
             Instant.ofEpochSecond(timestamp),
-            TimeZone.getDefault().toZoneId())
+            TimeZone.getTimeZone("America/New_York").toZoneId())
         assertAll(
             { assertEquals(Month.DECEMBER, zdt.month) },
             { assertEquals(18, zdt.dayOfMonth) },
