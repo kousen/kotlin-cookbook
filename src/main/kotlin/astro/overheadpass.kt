@@ -12,30 +12,31 @@ data class OverheadResponse(
     val message: String,
     val request: OverheadRequest,
     val response: List<TimeAndDuration>
-)
-
-data class OverheadRequest(
-    val latitude: Double,
-    val longitude: Double,
-    val altitude: Double,
-    val passes: Int,
-    val datetime: Long
-)
-
-data class TimeAndDuration(
-    val risetime: Long,
-    val duration: Long
-)
+) {
+    data class OverheadRequest(
+        val latitude: Double,
+        val longitude: Double,
+        val altitude: Double,
+        val passes: Int,
+        val datetime: Long
+    )
+    data class TimeAndDuration(
+        val risetime: Long,
+        val duration: Long
+    )
+}
 
 class Overhead {
     companion object {
         const val base = "http://api.open-notify.org/iss-pass.json"
     }
 
-    fun getOverheadResponse(lat: Double,
-                            lng: Double,
-                            alt: Double = 0.0,
-                            num: Int = 5): OverheadResponse {
+    fun getOverheadResponse(
+        lat: Double,
+        lng: Double,
+        alt: Int = 10,
+        num: Int = 5
+    ): OverheadResponse {
         val url = "$base?lat=$lat&lon=$lng&alt=$alt&n=$num"
         val json = URL(url).readText()
         return Gson().fromJson(json, OverheadResponse::class.java)
