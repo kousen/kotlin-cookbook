@@ -1,6 +1,6 @@
 == Kotlin Cookbook samples
 
-Code from the book _Kotlin Cookbook_, to appear from O'Reilly in 2019.
+Code from the book _Kotlin Cookbook_, now available from http://shop.oreilly.com/product/0636920224327.do[O'Reilly Media].
 
 Ken Kousen +
 http://www.kousenit.com +
