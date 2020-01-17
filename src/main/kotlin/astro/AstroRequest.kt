@@ -45,9 +45,6 @@ suspend fun ktorClient(): AstroResult = coroutineScope {
     }
 
     client.get<AstroResult>("http://api.open-notify.org/astros.json")
-        .also {
-            client.close()
-        }
 }
 
 fun main() {
