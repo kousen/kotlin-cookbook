@@ -1,6 +1,13 @@
 package astro
 
 import com.google.gson.Gson
+import io.ktor.client.HttpClient
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.request.get
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.net.URL
 
 class AstroRequest {
@@ -19,21 +26,45 @@ data class AstroResult(
 )
 
 data class Assignment(
-    val craft: String,
-    val name: String
+    val name: String,
+    val craft: String
 )
 
-// NOTE: Does not use AstroRequest at all; see AstroRequestTest for that
-fun main() {
-    Gson().fromJson(
-        URL("http://api.open-notify.org/astros.json").readText(),
-        AstroResult::class.java
-    ).also { astroResult ->
-        println("There are ${astroResult.number} people in space:")
-        astroResult.people.forEach { assignment ->
-            println("\t${assignment.name} aboard ${assignment.craft}")
+suspend fun urlGson(): AstroResult = coroutineScope {
+    withContext(Dispatchers.IO) {
+        Gson().fromJson(
+            URL("http://api.open-notify.org/astros.json").readText(),
+            AstroResult::class.java
+        )
+    }
+}
+
+suspend fun ktorClient(): AstroResult = coroutineScope {
+    val client = HttpClient() {
+        install(JsonFeature)
+    }
+
+    client.get<AstroResult>("http://api.open-notify.org/astros.json")
+        .also {
+            client.close()
         }
-    }.people.map(Assignment::name)
-        .also(::println)  // or use let instead of also
+}
+
+fun main() {
+    runBlocking {
+        urlGson().let { astroResult ->
+            println("There are ${astroResult.number} people in space:")
+            for ((name, craft) in astroResult.people) {
+                println("\t$name aboard $craft")
+            }
+        }
+
+        ktorClient().let { astroResult ->
+            println("There are ${astroResult.number} people in space:")
+            for ((name, craft) in astroResult.people) {
+                println("\t$name aboard $craft")
+            }
+        }
+    }
 }
 
