@@ -3,10 +3,7 @@ package coroutines
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.net.URL
 import java.text.NumberFormat
 import java.time.Instant
@@ -156,8 +153,7 @@ suspend fun asyncZips(vararg zips: String) = coroutineScope {
                 println(Thread.currentThread().name)
                 owm.getWeather(it)
             }
-        }
-            .map { it.await() }
+        }.awaitAll()
     }
 }
 

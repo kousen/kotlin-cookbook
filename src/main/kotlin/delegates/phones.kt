@@ -5,8 +5,7 @@ interface Dialable {
 }
 
 class Phone : Dialable {
-    override fun dial(number: String) =
-        "Dialing $number..."
+    override fun dial(number: String) = "Dialing $number..."
 }
 
 interface Snappable {
@@ -14,8 +13,7 @@ interface Snappable {
 }
 
 class Camera : Snappable {
-    override fun takePicture() =
-        "Taking picture..."
+    override fun takePicture() = "Taking picture..."
 }
 
 class SmartPhone(

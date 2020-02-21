@@ -4,7 +4,7 @@ plugins {
     `java-library`
     kotlin("jvm") version "1.3.61"
     id("me.champeau.gradle.jmh") version "0.5.0"
-    id("com.palantir.graal") version "0.6.0-58-gce10e7e"
+    id("com.palantir.graal") version "0.6.0-93-g176e02b"
 }
 
 group = "com.kousenit"
