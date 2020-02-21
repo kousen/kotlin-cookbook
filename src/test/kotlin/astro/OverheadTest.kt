@@ -23,8 +23,7 @@ internal class OverheadTest {
             { assertEquals(45.0, output.request.latitude, 0.01) },
             { assertEquals(-122.3, output.request.longitude, 0.01) },
             { assertEquals(20.0, output.request.altitude, 0.01) },
-            { assertEquals(5, output.request.passes) },
-            { assertEquals(5, output.response.size) }
+            { assertEquals(5, output.request.passes) }
         )
     }
 }
