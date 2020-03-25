@@ -17,7 +17,7 @@ internal class OverloadsTest {
     }
 
     @Test
-    internal fun `check overloaded Product contructor`() {
+    internal fun `check overloaded Product constructor`() {
         assertAll("Overloads called from Kotlin",
             { println(Product("Name", 5.0, "Desc")) },
             { println(Product("Name", 5.0)) },
