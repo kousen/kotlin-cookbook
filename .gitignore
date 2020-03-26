@@ -8,3 +8,4 @@ build/
 presources/
 *.iml
 
+/src/main/resources/yoda_key.txt
