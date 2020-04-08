@@ -10,6 +10,6 @@ fun main() {
         thread {
             Thread.sleep(sleepTime)
             println("${Thread.currentThread().name} for $n after ${sleepTime}ms")
-        }
+        }.join()
     }
 }

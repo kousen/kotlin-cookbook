@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertThrows
 internal class LateInitDemoTest {
 
     @Test
-    internal fun `unitialized lateinit property throws exception`() {
+    internal fun `uninitialized lateinit property throws exception`() {
         assertThrows<UninitializedPropertyAccessException> { LateInitDemo().name }
     }
 

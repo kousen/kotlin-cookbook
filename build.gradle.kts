@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.3.70"
+    kotlin("jvm") version "1.3.71"
     id("me.champeau.gradle.jmh") version "0.5.0"
     id("com.palantir.graal") version "0.6.0-93-g176e02b"
 }
