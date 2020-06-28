@@ -14,12 +14,15 @@ data class AstroData(
     val people: List<NameCraft>
 )
 
-fun main() {
-    val data = Gson().fromJson(
-        URL("http://api.open-notify.org/astros.json").readText(),
-        AstroData::class.java)
-    println("There are ${data.number} people in space")
-    for ((n,c) in data.people) {
+inline fun <reified T> Gson.fromJson(json: String): T =
+    this.fromJson(json, T::class.java)
+    // this.fromJson(json, typeOf<T>().javaType)
+
+fun main() = Gson().fromJson<AstroData>(
+    URL("http://api.open-notify.org/astros.json").readText()
+).let {
+    println("There are ${it.number} people in space")
+    for ((n, c) in it.people) {
         println("$n aboard $c")
     }
 }
