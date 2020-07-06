@@ -4,8 +4,6 @@ import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.closeTo
 import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertAll
 import kotlin.math.pow
 
