@@ -4,8 +4,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.contains
-import org.junit.Assert.assertThat
 import org.junit.jupiter.api.Test
 import java.math.BigInteger
 
