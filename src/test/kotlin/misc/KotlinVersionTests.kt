@@ -30,7 +30,8 @@ class KotlinVersionTests {
 
     @Test
     internal fun `check current version inside range`() {
-        assertTrue(KotlinVersion.CURRENT in KotlinVersion(1,2)..KotlinVersion(1,4))
+        assertTrue(KotlinVersion.CURRENT in
+                KotlinVersion(1,2)..KotlinVersion(1,4, 10))
     }
 
     @Test
