@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.4.0"
+    kotlin("jvm") version "1.4.10"
     id("me.champeau.gradle.jmh") version "0.5.0"
     id("com.palantir.graal") version "0.7.1-13-gd190241"
 }
@@ -34,7 +34,7 @@ dependencies {
 
 
     testImplementation("org.hamcrest:hamcrest:2.2")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.9")
     testImplementation(kotlin("test-junit5"))
 
