@@ -19,12 +19,12 @@ class AstroRequestTest {
     }
 
     @Test
-    fun `url with gson`() = runBlocking<Unit> {
+    fun `url with gson`() {
         checkAssertions(urlGson())
     }
 
     @Test
-    fun `url with kotlinx serialization`() = runBlocking<Unit> {
+    fun `url with kotlinx serialization`() {
         checkAssertions(urlKotlinxSerialization())
     }
 
