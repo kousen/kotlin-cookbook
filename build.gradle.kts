@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     `java-library`
     kotlin("jvm") version "1.4.10"
+    kotlin("plugin.serialization") version "1.4.10"
     id("me.champeau.gradle.jmh") version "0.5.0"
     id("com.palantir.graal") version "0.7.1-13-gd190241"
 }
@@ -22,9 +23,10 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
+    //implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
 
     implementation("org.apache.commons:commons-math3:3.6.1")
     implementation("com.google.code.gson:gson:2.8.6")

@@ -99,7 +99,7 @@ data class Model(
     fun simpleString(): String =
         """
             $name
-                Current: ${NumberFormat.getInstance().format(temperature)} F"
+                Current: ${NumberFormat.getInstance().format(temperature)} F
                 High: $high F, Low: $low F
         """.trimIndent()
 
