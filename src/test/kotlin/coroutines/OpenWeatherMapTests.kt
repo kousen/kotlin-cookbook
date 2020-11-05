@@ -8,7 +8,7 @@ import org.junit.jupiter.api.assertAll
 
 class OpenWeatherMapTests {
     private val owm = OpenWeatherMap()
-    private val model = owm.getWeather()
+    private val model = owm.getWeatherByZip()
 
     @Test
     internal fun `convert from Kelvin to F`() {
@@ -25,6 +25,6 @@ class OpenWeatherMapTests {
 
     @Test
     internal fun `Is it always sunny in Philadelphia?`() {
-        println(owm.getWeather("19102"))
+        println(owm.getWeatherByZip("19102"))
     }
 }

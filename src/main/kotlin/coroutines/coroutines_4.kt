@@ -1,23 +1,13 @@
 package coroutines
 
-import kotlinx.coroutines.*
-import java.util.concurrent.Executors
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 fun main() = runBlocking<Unit> {
-    executorAsDispatcher()
     launchWithIO()
     launchWithDefault()
-}
-
-suspend fun executorAsDispatcher() {
-    Executors.newFixedThreadPool(10)
-        .asCoroutineDispatcher().use {
-            withContext(it) {
-                delay(100L)
-                println("Using provided thread pool")
-                println(Thread.currentThread().name)
-            }
-        }
 }
 
 suspend fun launchWithIO() {

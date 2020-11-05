@@ -131,18 +131,22 @@ class OpenWeatherMap {
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .setPrettyPrinting().create()
 
-    fun getWeather(zip: String = "06447"): Model {
+    fun getWeatherByZip(zip: String = "06447"): Model {
         val url = "$base?zip=${zip.substring(0..4)}&appid=$appid"
         val text = URL(url).readText()
-        // val json = JsonParser.parseString(text)
-        // println(gson.toJson(json))
+        return gson.fromJson(text, Model::class.java)
+    }
+
+    fun getWeatherByCity(city: String = "London"): Model {
+        val url = "$base?q=${city}&appid=$appid"
+        val text = URL(url).readText()
         return gson.fromJson(text, Model::class.java)
     }
 }
 
 fun syncZips(vararg zips: String): List<Model> {
     val owm = OpenWeatherMap()
-    return zips.map { owm.getWeather(it) }
+    return zips.map { owm.getWeatherByZip(it) }
 }
 
 suspend fun asyncZips(vararg zips: String) = coroutineScope {
@@ -150,9 +154,17 @@ suspend fun asyncZips(vararg zips: String) = coroutineScope {
     withContext(Dispatchers.IO) {
         zips.map {
             async {
-                println(Thread.currentThread().name)
-                owm.getWeather(it)
+                owm.getWeatherByZip(it)
             }
+        }.awaitAll()
+    }
+}
+
+suspend fun asyncCities(vararg cities: String) = coroutineScope {
+    val owm = OpenWeatherMap()
+    withContext(Dispatchers.IO) {
+        cities.map { city ->
+            async { owm.getWeatherByCity(city) }
         }.awaitAll()
     }
 }
@@ -164,19 +176,29 @@ inline fun <R> measureTimeAndReturn(block: () -> R): Pair<Long, R> {
     return Pair(time, result)
 }
 
-suspend fun main() {
+fun main() = runBlocking<Unit> {
     // synchronous
-    val (time, result) = measureTimeAndReturn {
+    val (time, resultList) = measureTimeAndReturn {
         syncZips("06447", "96801", "02115")
     }
-    println("Elapsed time (sync): $time")
-    result.forEach { println(it.simpleString()) }
+    println("Elapsed time (sync): ${time}ms")
+    resultList.forEach { println(it.simpleString()) }
 
+    println()
     // asynchronous
     measureTimeAndReturn {
         asyncZips("06447", "96801", "02115")
-    }.also {
-        println("Elapsed time (async): ${it.first} ms")
-        it.second.forEach { println(it.simpleString()) }
+    }.also { (time, results) ->
+        println("Elapsed time (async): ${time}ms")
+        results.forEach { result -> println(result.simpleString()) }
+    }
+
+    println()
+    // By cities
+    measureTimeAndReturn {
+        asyncCities("London", "Hyderabad", "San Francisco")
+    }.also { (time, results) ->
+        println("Elapsed time (async): ${time}ms")
+        results.forEach { result -> println(result.simpleString()) }
     }
 }
