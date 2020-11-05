@@ -9,6 +9,12 @@ class MapTests {
     @Test
     internal fun `create map using infix to function`() {
         val map = mapOf("a" to 1, "b" to 2, "c" to 2)
+        // Destructuring on Map.Entry. See component1 and component2 extension functions
+        //   in https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/-entry/
+        for ((key,value) in map) {
+            println("$key maps to $value")
+        }
+
         assertAll(
             { assertThat(map, hasKey("a")) },
             { assertThat(map, hasKey("b")) },

@@ -17,7 +17,7 @@ fun firstDoubleUsingSequences() =
 
 
 fun main() {
-//    println(firstDoubleUsingCollectionsV1())
+//    println(firstDoubleUsingCollectionsV1()) // note: verbose (but that's the point)
 //    println(firstDoubleUsingCollectionsV2())
     println(firstDoubleUsingSequences())
 }
