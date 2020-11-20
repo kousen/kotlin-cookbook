@@ -31,6 +31,6 @@ fun main() = runBlocking<Unit> {
 }
 
 suspend fun networkCall(n: Long) : String {
-    delay(Random.nextLong(500))
+    delay(500)
     return "response $n"
 }

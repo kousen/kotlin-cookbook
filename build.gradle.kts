@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.4.10"
-    kotlin("plugin.serialization") version "1.4.10"
+    kotlin("jvm") version "1.4.20"
+    kotlin("plugin.serialization") version "1.4.20"
     id("me.champeau.gradle.jmh") version "0.5.0"
     id("com.palantir.graal") version "0.7.1-13-gd190241"
 }
@@ -51,7 +51,7 @@ java {
 tasks {
     test {
         useJUnitPlatform {
-            maxParallelForks = Runtime.getRuntime().availableProcessors() / 2
+            maxParallelForks = 2
         }
     }
 }

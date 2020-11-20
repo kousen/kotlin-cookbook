@@ -29,7 +29,8 @@ tailrec fun fibonacci(n: Int, a: Int = 0, b: Int = 1): Int =
     }
 
 fun fibonacciFold(n: Int) =
-    (2 until n).fold(1 to 1) { (prev, curr), _ -> curr to (prev + curr) }.second
+    //(2 until n).fold(1 to 1) { (prev, curr), _ -> curr to (prev + curr) }.second
+    (2..n+1).fold(1 to 0) { (prev, curr), _ -> curr to (prev + curr) }.second
 
 fun fibonacciFoldDebug(n: Int) =
     (2 until n).fold(1 to 1) { (prev, curr), _ ->
