@@ -19,7 +19,7 @@ graal {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
