@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.4.21"
-    kotlin("plugin.serialization") version "1.4.21"
+    kotlin("jvm") version "1.4.30"
+    kotlin("plugin.serialization") version "1.4.30"
     id("me.champeau.gradle.jmh") version "0.5.2"
     id("com.palantir.graal") version "0.7.2"
 }
@@ -36,7 +36,7 @@ dependencies {
 
 
     testImplementation("org.hamcrest:hamcrest:2.2")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1")
     testImplementation(kotlin("test-junit5"))
 
