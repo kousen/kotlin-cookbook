@@ -1,7 +1,10 @@
+@file:Suppress("HttpUrlsUsage")
+
 package astro
 
 import com.google.gson.Gson
 import io.ktor.client.*
+import io.ktor.client.engine.cio.*
 import io.ktor.client.features.json.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.Dispatchers
@@ -25,7 +28,7 @@ fun urlGson(): AstroResult =
 
 
 suspend fun ktorClient(): AstroResult {
-    val client = HttpClient {
+    val client = HttpClient(CIO) {
         install(JsonFeature)
     }
 
