@@ -49,11 +49,9 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-tasks {
-    test {
-        useJUnitPlatform {
-            maxParallelForks = 2
-        }
+tasks.named<Test>("test") {
+    useJUnitPlatform {
+        maxParallelForks = 4
     }
 }
 
@@ -62,5 +60,6 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "1.8"
         freeCompilerArgs = listOf("-Xjsr305=strict")
         suppressWarnings = true
+        useIR = true
     }
 }
