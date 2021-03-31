@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.4.30"
-    kotlin("plugin.serialization") version "1.4.30"
+    kotlin("jvm") version "1.4.32"
+    kotlin("plugin.serialization") version "1.4.32"
     id("me.champeau.gradle.jmh") version "0.5.3"
     id("com.palantir.graal") version "0.7.2"
 }
