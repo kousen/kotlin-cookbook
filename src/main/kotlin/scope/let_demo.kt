@@ -1,19 +1,27 @@
 package scope
 
+import java.util.*
+
 fun processNullableString(str: String?) =
-    str?.let {
+    str?.let { s ->
         when {
-            it.isEmpty() -> "Empty"
-            it.isBlank() -> "Blank"
-            else -> it.capitalize()
+            s.isEmpty() -> "Empty"
+            s.isBlank() -> "Blank"
+            else -> s.replaceFirstChar {
+                if (it.isLowerCase())
+                    it.titlecase(Locale.getDefault())
+                else it.toString()
+            }
         }
     } ?: "Null"
 
-fun processString(str: String) =
-    str.let {
-        when {
-            it.isEmpty() -> "Empty"
-            it.isBlank() -> "Blank"
-            else -> it.capitalize()
-        }
+fun processString(str: String) = when {
+    str.isEmpty() -> "Empty"
+    str.isBlank() -> "Blank"
+    else -> str.replaceFirstChar {
+        if (it.isLowerCase())
+            it.titlecase(Locale.getDefault())
+        else it.toString()
     }
+}
+

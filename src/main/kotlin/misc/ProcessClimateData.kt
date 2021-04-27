@@ -8,10 +8,10 @@ fun extractData(
 ) = FileReader(fileName).useLines { lines ->
     // Sequence<String>
     lines.drop(3)                                  // skip header lines
-        .map { line -> line.split(",") }           // Sequence<String[]>
+        .map { line -> line.split(",") }   // Sequence<String[]>
         .filter { it[0] == category }
-        .sortedBy { it[1] }                        // sort by year
-        .map { it[1].toInt() to it[2].toDouble() } // Sequence<Pair<Int,Double>>
+        .sortedBy { it[1] }                          // sort by year
+        .map { it[1].toInt() to it[2].toDouble() }   // Sequence<Pair<Int,Double>>
         .toMap()
 }
 

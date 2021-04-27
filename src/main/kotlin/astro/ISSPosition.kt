@@ -30,11 +30,11 @@ class ProcessAstroData {
         const val url = "http://api.open-notify.org/iss-now.json"
     }
 
-    fun getResponse(): IssResponse =
-        Gson().fromJson(URL(url).readText(), IssResponse::class.java)
+    val response: IssResponse
+        get() = Gson().fromJson(URL(url).readText(), IssResponse::class.java)
 
-    fun getPosition() =
-        getResponse().also {
+    val position
+        get() = response.also {
             println(
                 "As of " + it.zdt.format(
                     DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG)
@@ -45,6 +45,6 @@ class ProcessAstroData {
 
 fun main() {
     val demo = ProcessAstroData()
-    val (lat, lng) = demo.getPosition()
+    val (lat, lng) = demo.position
     println("$lat deg N, $lng deg W")
 }

@@ -16,13 +16,14 @@ data class AstroData(
 
 inline fun <reified T> Gson.fromJson(json: String): T =
     this.fromJson(json, T::class.java)
-    // this.fromJson(json, typeOf<T>().javaType)
+// this.fromJson(json, typeOf<T>().javaType)
 
-fun main() = Gson().fromJson<AstroData>(
-    URL("http://api.open-notify.org/astros.json").readText()
-).let {
-    println("There are ${it.number} people in space")
-    for ((n, c) in it.people) {
-        println("$n aboard $c")
+fun main() =
+    Gson().fromJson<AstroData>(
+        URL("http://api.open-notify.org/astros.json").readText()
+    ).let {
+        println("There are ${it.number} people in space")
+        for ((n, c) in it.people) {
+            println("$n aboard $c")
+        }
     }
-}
