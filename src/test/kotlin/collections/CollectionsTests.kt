@@ -92,7 +92,7 @@ class CollectionsTests {
             val shapes = mutableListOf<Shape>()
             shapes.addAll(circles)
             shapes.addAll(squares)
-            val totalArea = shapes.map { it.getArea() }.sum()
+            val totalArea = shapes.map { it.area }.sum()
             println(totalArea)
         }
     }
