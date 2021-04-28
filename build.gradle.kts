@@ -60,6 +60,5 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "11"
         freeCompilerArgs = listOf("-Xjsr305=strict")
         suppressWarnings = true
-        useIR = true
     }
 }
