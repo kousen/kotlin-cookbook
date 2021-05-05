@@ -6,6 +6,5 @@ public class SingletonKtTest {
     @Test
     void accessingSingletonMembers() {
         MySingleton.INSTANCE.myFunction();
-        MySingleton.INSTANCE.getMyProperty();
     }
 }

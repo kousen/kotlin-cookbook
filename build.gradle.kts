@@ -4,7 +4,6 @@ plugins {
     `java-library`
     kotlin("jvm") version "1.5.0"
     kotlin("plugin.serialization") version "1.5.0"
-    id("me.champeau.gradle.jmh") version "0.5.3"
     id("com.palantir.graal") version "0.7.2"
 }
 
