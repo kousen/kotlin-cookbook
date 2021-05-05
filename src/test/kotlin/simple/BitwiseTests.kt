@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 import java.awt.Color
 import kotlin.math.absoluteValue
-import kotlin.math.sign
 
 class BitwiseTests {
     @Test
@@ -86,9 +85,11 @@ class BitwiseTests {
     }
 
     fun twosComplement(i: Int, base: Int) =
-        if (i == 0) 0
-        else if (base == 32) Integer.MAX_VALUE - i.absoluteValue + 1
-        else 2.pow(base) - i.absoluteValue
+        when {
+            i == 0 -> 0
+            base == 32 -> Integer.MAX_VALUE - i.absoluteValue + 1
+            else -> 2.pow(base) - i.absoluteValue
+        }
 
     @Test
     internal fun `odds and evens`() {

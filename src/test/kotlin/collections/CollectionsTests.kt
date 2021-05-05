@@ -6,10 +6,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import java.lang.UnsupportedOperationException
 import java.util.*
-import kotlin.collections.LinkedHashSet
 
 class CollectionsTests {
     private lateinit var numList : List<Int>
@@ -92,7 +89,7 @@ class CollectionsTests {
             val shapes = mutableListOf<Shape>()
             shapes.addAll(circles)
             shapes.addAll(squares)
-            val totalArea = shapes.map { it.area }.sum()
+            val totalArea = shapes.sumOf { it.area }
             println(totalArea)
         }
     }
@@ -132,7 +129,7 @@ class CollectionsTests {
             assertThat(mutableMap.keys, contains("a", "b", "c"))
             assertThat(mutableMap.values, contains(1, 2, 2))
 
-            mutableMap.put("d", 1)
+            mutableMap["d"] = 1
             assertThat(mutableMap.size, `is`(4))
         }
 

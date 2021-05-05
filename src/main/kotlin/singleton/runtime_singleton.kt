@@ -3,7 +3,7 @@ package singleton
 import java.sql.Connection
 
 object MySingleton {
-    val myProperty = 3
+    const val myProperty = 3
 
     fun myFunction() = "Hello"
 }

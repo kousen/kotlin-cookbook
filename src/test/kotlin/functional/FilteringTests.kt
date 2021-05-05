@@ -32,7 +32,7 @@ class FilteringTests {
     internal fun `regular filter with a predicate`() {
         val list = listOf("a", LocalDate.now(), 3, 1, 4, "b")
 
-        val strings = list.filter { it is String }
+        val strings = list.filterIsInstance<String>()
 
         // type is erased, so inferred type is List<Any>
         assertTrue(strings.all { it is String })

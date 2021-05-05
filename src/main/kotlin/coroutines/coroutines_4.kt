@@ -5,7 +5,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-fun main() = runBlocking<Unit> {
+fun main() = runBlocking {
     launchWithIO()
     launchWithDefault()
 }

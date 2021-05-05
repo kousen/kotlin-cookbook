@@ -7,24 +7,19 @@ import org.apache.commons.validator.routines.ISBNValidator
 import org.apache.commons.validator.routines.checkdigit.ISBNCheckDigit
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
-import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 import org.junit.jupiter.api.assertAll
-import org.junit.jupiter.api.extension.ParameterContext
-import org.junit.jupiter.api.function.Executable
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.aggregator.AggregateWith
-import org.junit.jupiter.params.aggregator.ArgumentsAccessor
-import org.junit.jupiter.params.aggregator.ArgumentsAggregator
 import org.junit.jupiter.params.provider.CsvFileSource
 import org.junit.jupiter.params.provider.CsvSource
+import java.awt.print.Book
 import java.time.LocalDate
 import java.time.Month
 import java.util.logging.Logger
-import kotlin.math.exp
 
 @Suppress("UNUSED_VARIABLE")
 internal class BookTests {

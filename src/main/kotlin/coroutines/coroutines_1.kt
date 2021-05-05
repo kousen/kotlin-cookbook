@@ -3,10 +3,9 @@ package coroutines
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 
-fun main() = runBlocking<Unit> {
+fun main() = runBlocking {
     val millis1 = measureTimeMillis {
         val job1 = launch {
             val response1 = networkCall(1)

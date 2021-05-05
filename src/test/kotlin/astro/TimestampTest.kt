@@ -1,15 +1,15 @@
-package astro;
+package astro
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
-import java.time.Instant;
+import java.time.Instant
 import java.time.Month
 import java.time.ZoneId
-import java.time.ZonedDateTime;
-import java.util.TimeZone;
+import java.time.ZonedDateTime
+import java.util.TimeZone
 
 class TimestampTest {
 

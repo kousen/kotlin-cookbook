@@ -16,7 +16,7 @@ var checked: Int by Delegates.vetoable(0) { prop, old, new ->
     new >= 0
 }
 
-var shouldNotBeNull: String by Delegates.notNull<String>()
+var shouldNotBeNull: String by Delegates.notNull()
 
 
 fun main() {

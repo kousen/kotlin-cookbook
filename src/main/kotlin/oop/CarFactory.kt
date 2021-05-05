@@ -1,4 +1,4 @@
-package com.oreilly
+package oop
 
 data class Car(val horsePower: Int)
 

@@ -5,7 +5,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
-fun main() = runBlocking<Unit> {
+fun main() = runBlocking {
     val deferred1 = async {
         networkCall(1)
     }

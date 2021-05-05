@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 @Suppress("USELESS_IS_CHECK")
-public class ArrayTests {
+class ArrayTests {
     @Test
     internal fun `create with arrayOf`() {
         val strings = arrayOf("this", "is", "an", "array", "of", "strings")

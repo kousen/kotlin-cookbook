@@ -14,7 +14,7 @@ fun main() {
     )
 
     // Create comparator and sort using it
-    val comparator = compareBy<Golfer>(Golfer::score)
+    val comparator = compareBy(Golfer::score)
         .thenBy(Golfer::last)
         .thenBy(Golfer::first)
     golfers.sortedWith(comparator)

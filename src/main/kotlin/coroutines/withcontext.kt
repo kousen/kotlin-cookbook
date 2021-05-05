@@ -19,7 +19,7 @@ suspend fun retrieve2(url: String) = coroutineScope {
     }.await()
 }
 
-fun main() = runBlocking<Unit> {
+fun main() = runBlocking {
     val result1 = retrieve1("www.mysite.com")
     val result2 = retrieve2("www.mysite.com")
     println("printing result on ${Thread.currentThread().name} $result1")
