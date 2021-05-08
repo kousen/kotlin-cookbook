@@ -130,6 +130,7 @@ class BitwiseTests {
         assertThat(color1, equalTo(color))
     }
 
+    @Suppress("LocalVariableName")
     @Test
     internal fun `and, or, xor`() {
         val n1 = 0b0000_1100      // 12

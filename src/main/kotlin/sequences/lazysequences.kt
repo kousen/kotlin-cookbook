@@ -1,5 +1,6 @@
 package sequences
 
+@Suppress("SimplifiableCallChain")
 fun firstDoubleUsingCollectionsV1() =
     (100 until 200).map { println("doubling $it"); it * 2 }
         .filter { println("filtering $it"); it % 3 == 0 }

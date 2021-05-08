@@ -1,3 +1,5 @@
+@file:Suppress("FunctionName")
+
 package misc
 
 fun `only use backtics on test functions`() {

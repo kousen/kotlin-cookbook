@@ -1,3 +1,5 @@
+@file:Suppress("FunctionName")
+
 package operators
 
 import kotlin.math.pow

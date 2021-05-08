@@ -14,8 +14,8 @@ internal class IfEmptyOrBlankKtTest {
         val products = listOf(overthruster, fluxcapacitor, tpsReportCoverSheet)
 
         assertAll( "On sale products",
-            { assertEquals("Flux Capacitor", onSaleProducts_ifEmptyCollection(products)) },
-            { assertEquals("Flux Capacitor", onSaleProducts_ifEmptyString(products)) })
+            { assertEquals("Flux Capacitor", onSaleProductsIfEmptyCollection(products)) },
+            { assertEquals("Flux Capacitor", onSaleProductsIfEmptyString(products)) })
     }
 
     @Test
@@ -23,7 +23,7 @@ internal class IfEmptyOrBlankKtTest {
         val products = listOf(overthruster, tpsReportCoverSheet)
 
         assertAll( "No products on sale",
-            { assertEquals("none", onSaleProducts_ifEmptyCollection(products)) },
-            { assertEquals("none", onSaleProducts_ifEmptyString(products)) })
+            { assertEquals("none", onSaleProductsIfEmptyCollection(products)) },
+            { assertEquals("none", onSaleProductsIfEmptyString(products)) })
     }
 }

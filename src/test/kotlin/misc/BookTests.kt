@@ -84,7 +84,7 @@ internal class BookTests {
         val mjg = createBook(isbn = "1935182943", title = "Making Java Groovy",
             published = LocalDate.parse("2013-09-30"))
 
-        val kotlin_in_action = createMultiAuthorBook()
+        val kotlinInAction = createMultiAuthorBook()
 
         assertThat(mjr, `is`(books[2]))
         assertThat(mjg, `is`(books[0]))
