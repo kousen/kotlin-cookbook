@@ -41,6 +41,7 @@ dependencies {
     testImplementation(kotlin("test-junit5"))
 
     implementation(kotlin("script-runtime"))
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 java {
@@ -60,4 +61,12 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         suppressWarnings = true
     }
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
 }
