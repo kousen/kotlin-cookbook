@@ -2,9 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.5.31"
-    kotlin("plugin.serialization") version "1.5.31"
-    id("com.palantir.graal") version "0.9.0"
+    kotlin("jvm") version "1.6.10"
+    kotlin("plugin.serialization") version "1.6.10"
+    id("com.palantir.graal") version "0.10.0"
 }
 
 group = "com.kousenit"
@@ -24,20 +24,20 @@ repositories {
 dependencies {
     //implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.3.1")
 
     implementation("org.apache.commons:commons-math3:3.6.1")
-    implementation("com.google.code.gson:gson:2.8.7")
+    implementation("com.google.code.gson:gson:2.8.9")
     implementation("commons-validator:commons-validator:1.7")
-    implementation("io.ktor:ktor-client-core:1.6.0")
-    implementation("io.ktor:ktor-client-cio:1.6.0")
-    implementation("io.ktor:ktor-client-serialization:1.6.0")
+    implementation("io.ktor:ktor-client-core:1.6.6")
+    implementation("io.ktor:ktor-client-cio:1.6.6")
+    implementation("io.ktor:ktor-client-serialization:1.6.6")
 
 
     testImplementation("org.hamcrest:hamcrest:2.2")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
     testImplementation(kotlin("test-junit5"))
 
     implementation(kotlin("script-runtime"))
