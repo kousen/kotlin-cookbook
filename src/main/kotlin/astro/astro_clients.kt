@@ -13,6 +13,7 @@ import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import serialization.AstroResult
 import java.net.URL
 
 fun urlKotlinxSerialization() =
@@ -26,6 +27,12 @@ fun urlGson(): AstroResult =
         AstroResult::class.java
     )
 
+fun gsonResultOrError() =
+    try {
+        Success(urlGson())
+    } catch (e: Exception) {
+        Failure(e)
+    }
 
 suspend fun ktorClient(): AstroResult {
     val client = HttpClient(CIO) {
@@ -41,14 +48,21 @@ suspend fun main() {
             urlGson().also(::println)
         }
 
-        val job2 = launch(Dispatchers.IO) {
-            ktorClient().also(::println)
+//        val job2 = launch(Dispatchers.IO) {
+//            ktorClient().also(::println)
+//        }
+
+//        val job3 = launch(Dispatchers.IO) {
+//            urlKotlinxSerialization().also(::println)
+//        }
+
+        val job4 = launch {
+            when (val result = gsonResultOrError()) {
+                is Success<AstroResult> -> println(result.data)
+                is Failure -> println("Exception: ${result.exception.message}")
+            }
         }
 
-        val job3 = launch(Dispatchers.IO) {
-            urlKotlinxSerialization().also(::println)
-        }
-
-        listOf(job1, job2, job3).joinAll()
+        listOf(job1, job4).joinAll()
     }
 }

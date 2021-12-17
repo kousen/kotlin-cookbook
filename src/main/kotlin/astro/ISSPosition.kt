@@ -1,6 +1,9 @@
 package astro
 
 import com.google.gson.Gson
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import java.net.URL
 import java.time.Instant
 import java.time.ZonedDateTime
@@ -8,11 +11,13 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
 
+@Serializable
 data class IssPosition(
     val latitude: Double,
     val longitude: Double
 )
 
+@Serializable
 data class IssResponse(
     val message: String,
     val iss_position: IssPosition,
@@ -31,6 +36,7 @@ class ProcessAstroData {
     }
 
     val response: IssResponse
+//        get() = Json.decodeFromString(URL(url).readText())
         get() = Gson().fromJson(URL(url).readText(), IssResponse::class.java)
 
     val position

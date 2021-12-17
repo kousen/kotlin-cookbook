@@ -1,6 +1,7 @@
 package astro
 
 import com.google.gson.Gson
+import serialization.AstroResult
 import java.net.URL
 
 class AstroRequest {
