@@ -22,22 +22,21 @@ repositories {
 }
 
 dependencies {
-    //implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 
     implementation("org.apache.commons:commons-math3:3.6.1")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("commons-validator:commons-validator:1.7")
-    implementation("io.ktor:ktor-client-core:1.6.6")
-    implementation("io.ktor:ktor-client-cio:1.6.6")
-    implementation("io.ktor:ktor-client-serialization:1.6.6")
+    implementation("io.ktor:ktor-client-core:1.6.7")
+    implementation("io.ktor:ktor-client-cio:1.6.7")
+    implementation("io.ktor:ktor-client-serialization:1.6.7")
 
 
     testImplementation("org.hamcrest:hamcrest:2.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
     testImplementation(kotlin("test-junit5"))
 
     implementation(kotlin("script-runtime"))
@@ -51,7 +50,7 @@ java {
 
 tasks.named<Test>("test") {
     useJUnitPlatform {
-        maxParallelForks = 4
+        maxParallelForks = Runtime.getRuntime().availableProcessors() / 2 + 1
     }
 }
 
@@ -61,12 +60,4 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         suppressWarnings = true
     }
-}
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = "11"
-}
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-    jvmTarget = "11"
 }
