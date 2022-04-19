@@ -27,7 +27,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
 
     implementation("org.apache.commons:commons-math3:3.6.1")
-    implementation("com.google.code.gson:gson:2.8.9")
+    implementation("com.google.code.gson:gson:2.9.0")
     implementation("commons-validator:commons-validator:1.7")
     implementation("io.ktor:ktor-client-core:1.6.7")
     implementation("io.ktor:ktor-client-cio:1.6.7")
