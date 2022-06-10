@@ -10,7 +10,7 @@ public class TryWithResourcesDemo {
         String path = "src/scripts.main/resources/book_data.csv";
 
         File file = new File(path);
-        String line = null;
+        String line;
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);

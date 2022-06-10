@@ -14,7 +14,8 @@ fun <T> repeatAndCapitalizeUsingAssociate(keys: Iterable<T>) =
     }
 
 fun <T> repeatAndCapitalizeUsingAssociateWith(keys: Iterable<T>) =
-        keys.associateWith { it.toString().repeat(5).capitalize() }
+        keys.associateWith { it.toString().repeat(5)
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } }
 
 fun main(args: Array<String>) {
     val keys = 'a'..'f'
