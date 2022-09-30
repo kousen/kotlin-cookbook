@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import static javaintegration.IOProblemKt.houstonWeHaveAProblem;
 
+@SuppressWarnings("CommentedOutCode")
 public class IOProblemDemo {
     public static void useTryCatchBlock() {
         try {
