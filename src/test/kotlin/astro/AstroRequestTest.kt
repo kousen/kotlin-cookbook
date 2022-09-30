@@ -15,7 +15,7 @@ class AstroRequestTest {
     }
 
     @Test
-    fun `ktor client`() = runBlocking<Unit> {
+    fun `ktor client`() = runBlocking {
         checkAssertions(ktorClient())
     }
 

@@ -4,9 +4,11 @@ package astro
 
 import com.google.gson.Gson
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.features.json.*
+import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.joinAll
@@ -36,10 +38,12 @@ fun gsonResultOrError() =
 
 suspend fun ktorClient(): AstroResult {
     val client = HttpClient(CIO) {
-        install(JsonFeature)
+        install(ContentNegotiation) {
+            json()
+        }
     }
 
-    return client.get("http://api.open-notify.org/astros.json")
+    return client.get("http://api.open-notify.org/astros.json").body()
 }
 
 suspend fun main() {
@@ -48,13 +52,13 @@ suspend fun main() {
             urlGson().also(::println)
         }
 
-//        val job2 = launch(Dispatchers.IO) {
-//            ktorClient().also(::println)
-//        }
+        val job2 = launch(Dispatchers.IO) {
+            ktorClient().also(::println)
+        }
 
-//        val job3 = launch(Dispatchers.IO) {
-//            urlKotlinxSerialization().also(::println)
-//        }
+        val job3 = launch(Dispatchers.IO) {
+            urlKotlinxSerialization().also(::println)
+        }
 
         val job4 = launch {
             when (val result = gsonResultOrError()) {
@@ -63,6 +67,6 @@ suspend fun main() {
             }
         }
 
-        listOf(job1, job4).joinAll()
+        listOf(job1, job2, job3, job4).joinAll()
     }
 }
