@@ -1,8 +1,7 @@
 package collections
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
-import org.hamcrest.Matchers.closeTo
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.offset
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Test
@@ -43,7 +42,7 @@ internal class ProductTest {
         val p2 = p1.copy(price = 12.0)
         assertAll(
             { assertEquals("baseball", p2.name) },
-            { assertThat(p2.price, `is`(closeTo(12.0, 0.01))) },
+            { assertThat(p2.price).isCloseTo(12.0, offset(0.01)) },
             { assertFalse(p2.onSale) }
         )
     }
@@ -55,7 +54,7 @@ internal class ProductTest {
         val (name, price, sale) = p
         assertAll(
             { assertEquals(p.name, name) },
-            { assertThat(p.price, `is`(closeTo(price, 0.01))) },
+            { assertThat(p.price).isCloseTo(price, offset(0.01)) },
             { assertFalse(sale) })
     }
 }

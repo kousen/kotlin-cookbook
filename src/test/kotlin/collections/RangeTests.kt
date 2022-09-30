@@ -1,8 +1,6 @@
 package collections
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
-import org.hamcrest.Matchers.contains
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -14,9 +12,9 @@ class RangeTests {
     internal fun `coerceIn given a range`() {
         val range = 3..8
 
-        assertThat(5, `is`(5.coerceIn(range)))
-        assertThat(range.first, `is`(1.coerceIn(range)))
-        assertThat(range.last, `is`(9.coerceIn(range)))
+        assertThat(5).isEqualTo(5.coerceIn(range))
+        assertThat(range.first).isEqualTo(1.coerceIn(range))
+        assertThat(range.last).isEqualTo(9.coerceIn(range))
     }
 
     @Test
@@ -24,9 +22,9 @@ class RangeTests {
         val min = 2
         val max = 6
 
-        assertThat(5, `is`(5.coerceIn(min, max)))
-        assertThat(min, `is`(1.coerceIn(min, max)))
-        assertThat(max, `is`(9.coerceIn(min, max)))
+        assertThat(5).isEqualTo(5.coerceIn(min, max))
+        assertThat(min).isEqualTo(1.coerceIn(min, max))
+        assertThat(max).isEqualTo(9.coerceIn(min, max))
     }
 
     @Test
@@ -34,15 +32,13 @@ class RangeTests {
         val range = 0..10
 
         val chunked = range.chunked(3)
-        assertThat(
-            chunked, contains(
-                listOf(0, 1, 2), listOf(3, 4, 5),
-                listOf(6, 7, 8), listOf(9, 10)
-            )
+        assertThat(chunked).contains(
+            listOf(0, 1, 2), listOf(3, 4, 5),
+            listOf(6, 7, 8), listOf(9, 10)
         )
 
-        assertThat(range.chunked(3) { it.sum() }, `is`(listOf(3, 12, 21, 19)))
-        assertThat(range.chunked(3) { it.average() }, `is`(listOf(1.0, 4.0, 7.0, 9.5)))
+        assertThat(range.chunked(3) { it.sum() }).isEqualTo(listOf(3, 12, 21, 19))
+        assertThat(range.chunked(3) { it.average() }).isEqualTo(listOf(1.0, 4.0, 7.0, 9.5))
     }
 
     @Test
@@ -51,27 +47,26 @@ class RangeTests {
 
         assertAll("size = 3, step = 1",
             {
-                assertThat(range.windowed(3, 1),
-                    contains(
+                assertThat(range.windowed(3, 1)).contains(
                         listOf(0, 1, 2), listOf(1, 2, 3), listOf(2, 3, 4),
                         listOf(3, 4, 5), listOf(4, 5, 6), listOf(5, 6, 7),
-                        listOf(6, 7, 8), listOf(7, 8, 9), listOf(8, 9, 10)))
+                        listOf(6, 7, 8), listOf(7, 8, 9), listOf(8, 9, 10)
+                    )
             },
             {
-                assertThat(range.windowed(3, 1) { it.average() },
-                    contains(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0))
+                assertThat(range.windowed(3, 1) { it.average() })
+                    .contains(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0)
             }
         )
 
         assertAll("size = 3, step = 3",
             {
-                assertThat(range.windowed(3, 3),
-                    contains(listOf(0, 1, 2), listOf(3, 4, 5), listOf(6, 7, 8)))
+                assertThat(range.windowed(3, 3))
+                    .contains(listOf(0, 1, 2), listOf(3, 4, 5), listOf(6, 7, 8))
             },
             {
-                assertThat(
-                    range.windowed(3, 3) { it.average() },
-                    contains(1.0, 4.0, 7.0))
+                assertThat(range.windowed(3, 3) { it.average() })
+                    .contains(1.0, 4.0, 7.0)
             })
     }
 

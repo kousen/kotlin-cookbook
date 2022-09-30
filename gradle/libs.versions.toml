@@ -1,0 +1,46 @@
+[versions]
+assertj = "3.23.1"
+commons-collections4 = "4.4"
+commons-math3 = "3.6.1"
+commons-validator = "1.7"
+gson = "2.9.1"
+junit = "5.9.1"
+kotlinx-coroutines-core = "1.6.4"
+kotlinx-coroutines-test = "1.6.4"
+kotlinx-serialization-json = "1.4.0"
+ktor-client = "2.1.2"
+
+[libraries]
+assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+commons-collections4 = { module = "org.apache.commons:commons-collections4", version.ref = "commons-collections4" }
+commons-math3 = { module = "org.apache.commons:commons-math3", version.ref = "commons-math3" }
+commons-validator = { module = "commons-validator:commons-validator", version.ref = "commons-validator" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit-vintage = { module = "org.junit.vintage:junit-vintage-engine", version.ref = "junit" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines-core" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor-client" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-client" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor-client" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-client" }
+
+[bundles]
+junit = [
+    "junit-jupiter",
+    "junit-vintage",
+]
+ktor-client = [
+    "ktor-client-cio",
+    "ktor-client-content-negotiation",
+    "ktor-client-core",
+    "ktor-client-serialization",
+    "ktor-serialization-kotlinx-json",
+]
+
+[plugins]
+graal = "com.palantir.graal:0.12.0"
+version-catalog-update = "nl.littlerobots.version-catalog-update:0.6.1"
+versions = "com.github.ben-manes.versions:0.42.0"

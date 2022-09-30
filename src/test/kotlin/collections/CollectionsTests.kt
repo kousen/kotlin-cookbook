@@ -1,7 +1,6 @@
 package collections
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
@@ -30,13 +29,13 @@ class CollectionsTests {
             assertTrue(2 in listPlusElement)
 
             val listPlusList = numList + listOf(2, 6, 5)
-            assertThat(listPlusList, contains(3, 1, 4, 1, 5, 9, 2, 6, 5))
+            assertThat(listPlusList).contains(3, 1, 4, 1, 5, 9, 2, 6, 5)
 
             val listMinusElement = numList - 1
-            assertThat(listMinusElement, contains(3, 4, 1, 5, 9))
+            assertThat(listMinusElement).contains(3, 4, 1, 5, 9)
 
             val listMinusList = numList - listOf(3, 1, 4, 9)
-            assertThat(listMinusList, contains(5))  // removes both 1's (??)
+            assertThat(listMinusList).contains(5)  // removes both 1's (??)
         }
 
         @Test
@@ -52,7 +51,7 @@ class CollectionsTests {
             assertEquals(mutableNums, readOnly)
 
             mutableNums.add(2)
-            assertThat(readOnly, not(contains(2)))
+            assertThat(readOnly).doesNotContain(2)
         }
 
         @Test
@@ -79,7 +78,7 @@ class CollectionsTests {
             list.addLast(999)
             list[2] = 4
             list.addAll(listOf(1, 5, 9, 2, 6, 5))
-            assertThat(list, contains(3, 1, 4, 1, 5, 9, 2, 6, 5))
+            assertThat(list).contains(3, 1, 4, 1, 5, 9, 2, 6, 5)
         }
 
         @Test
@@ -98,8 +97,8 @@ class CollectionsTests {
     inner class SetTests {
         @Test
         internal fun `setOf eliminates duplicates`() {
-            assertThat(numSet.size, `is`(5))
-            assertThat(numSet, containsInAnyOrder(1, 3, 4, 5, 9))
+            assertThat(numSet.size).isEqualTo(5)
+            assertThat(numSet).contains(1, 3, 4, 5, 9)
         }
 
 
@@ -118,19 +117,19 @@ class CollectionsTests {
     inner class MapTests {
         @Test
         internal fun `mapOf creates a map`() {
-            assertThat(numMap.keys, containsInAnyOrder(1, 3, 4))
-            assertThat(numMap.values, containsInAnyOrder("one", "three", "four"))
-            assertThat(3, `is`(numMap.size))
+            assertThat(numMap.keys).contains(1, 3, 4)
+            assertThat(numMap.values).contains("one", "three", "four")
+            assertThat(3).isEqualTo(numMap.size)
         }
 
         @Test
         internal fun mutableMap() {
             val mutableMap = mutableMapOf("a" to 1, "b" to 2, "c" to 2)
-            assertThat(mutableMap.keys, contains("a", "b", "c"))
-            assertThat(mutableMap.values, contains(1, 2, 2))
+            assertThat(mutableMap.keys).contains("a", "b", "c")
+            assertThat(mutableMap.values).contains(1, 2, 2)
 
             mutableMap["d"] = 1
-            assertThat(mutableMap.size, `is`(4))
+            assertThat(mutableMap.size).isEqualTo(4)
         }
 
     }

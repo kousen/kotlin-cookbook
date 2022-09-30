@@ -1,18 +1,16 @@
 package misc
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
-import org.hamcrest.Matchers.contains
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class NumbersTests {
     @Test
     internal fun toBinaryStringAndBack() {
         val str = 42.toString(radix = 2)
-        assertThat(str, `is`("101010"))
+        assertThat(str).isEqualTo("101010")
 
         val num = "101010".toInt(radix = 2)
-        assertThat(num, `is`(42))
+        assertThat(num).isEqualTo(42)
     }
 
     @Test
@@ -21,18 +19,18 @@ class NumbersTests {
             it.toString(2).padStart(4, '0')
         }
 
-        assertThat(strings, contains(
+        assertThat(strings).containsExactly(
             "0000", "0001", "0010", "0011",
             "0100", "0101", "0110", "0111",
             "1000", "1001", "1010", "1011",
-            "1100", "1101", "1110", "1111"))
+            "1100", "1101", "1110", "1111")
 
         val nums = strings.map { it.toInt(2) }
-        assertThat(nums, contains(
+        assertThat(nums).containsExactly(
             0, 1, 2, 3,
             4, 5, 6, 7,
             8, 9, 10, 11,
-            12, 13, 14, 15))
+            12, 13, 14, 15)
     }
 
     @Test

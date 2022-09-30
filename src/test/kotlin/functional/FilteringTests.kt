@@ -1,7 +1,6 @@
 package functional
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
@@ -18,10 +17,10 @@ class FilteringTests {
         val ints = list.filterIsInstance<Int>()
         val dates = list.filterIsInstance(LocalDate::class.java)
 
-        assertThat(all, `is`(list))
-        assertThat(strings, containsInAnyOrder("a", "b"))
-        assertThat(ints, containsInAnyOrder(1, 3, 4))
-        assertThat(dates, contains(LocalDate.now()))
+        assertThat(all).isEqualTo(list)
+        assertThat(strings).contains("a", "b")
+        assertThat(ints).contains(1, 3, 4)
+        assertThat(dates).containsExactly(LocalDate.now())
 
         for (s in strings) {
             s.length
@@ -47,9 +46,9 @@ class FilteringTests {
         val ints = list.filterIsInstanceTo(mutableListOf<Int>())
         val dates = list.filterIsInstanceTo(mutableListOf<LocalDate>())
 
-        assertThat(all, `is`(list))
-        assertThat(strings, containsInAnyOrder("a", "b"))
-        assertThat(ints, containsInAnyOrder(1, 3, 4))
-        assertThat(dates, contains(LocalDate.now()))
+        assertThat(all).isEqualTo(list)
+        assertThat(strings).contains("a", "b")
+        assertThat(ints).contains(1, 3, 4)
+        assertThat(dates).containsExactly(LocalDate.now())
     }
 }

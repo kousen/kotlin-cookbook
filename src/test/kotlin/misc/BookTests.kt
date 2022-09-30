@@ -1,13 +1,11 @@
 package misc
 
+import org.assertj.core.api.Assertions.assertThat
 import collections.Book
 import collections.createBook
 import collections.createMultiAuthorBook
 import org.apache.commons.validator.routines.ISBNValidator
 import org.apache.commons.validator.routines.checkdigit.ISBNCheckDigit
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
-import org.hamcrest.Matchers.arrayContainingInAnyOrder
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.Test
@@ -32,20 +30,20 @@ internal class BookTests {
     @Test
     internal fun `test book the hard way`() {
         val book = books[0]
-        assertThat(book.isbn, `is`("1935182943"))
-        assertThat(book.title, `is`("Making Java Groovy"))
-        assertThat(book.author, `is`("Ken Kousen"))
-        assertThat(book.published, `is`(LocalDate.of(2013, Month.SEPTEMBER, 30)))
+        assertThat(book.isbn).isEqualTo("1935182943")
+        assertThat(book.title).isEqualTo("Making Java Groovy")
+        assertThat(book.author).isEqualTo("Ken Kousen")
+        assertThat(book.published).isEqualTo(LocalDate.of(2013, Month.SEPTEMBER, 30))
     }
 
     @Test
     internal fun `use JUnit 5 assertAll`() {
         val book = books[0]
         assertAll("check all properties of a book",
-            { assertThat(book.isbn, `is`("1935182943")) },
-            { assertThat(book.title, `is`("Making Java Groovy")) },
-            { assertThat(book.author, `is`("Ken Kousen")) },
-            { assertThat(book.published, `is`(LocalDate.of(2013, Month.SEPTEMBER, 30))) })
+            { assertThat(book.isbn).isEqualTo("1935182943") },
+            { assertThat(book.title).isEqualTo("Making Java Groovy") },
+            { assertThat(book.author).isEqualTo("Ken Kousen") },
+            { assertThat(book.published).isEqualTo(LocalDate.of(2013, Month.SEPTEMBER, 30)) })
     }
 
     @Test
@@ -53,7 +51,7 @@ internal class BookTests {
         val book = books[0]
         val expected = Book(isbn = "1935182943", title = "Making Java Groovy",
             author = "Ken Kousen", published = LocalDate.of(2013, Month.SEPTEMBER, 30))
-        assertThat(book, `is`(expected))
+        assertThat(book).isEqualTo(expected)
     }
 
     @Test
@@ -61,7 +59,7 @@ internal class BookTests {
         val badBook = books[2].copy(title = "Modern Java Cookbook")
         val found = arrayOf(books[2], books[0], books[1]) // Add badBook to see the assertion fail
         val expected = books
-        assertThat(found, arrayContainingInAnyOrder(*expected))
+        assertThat(found).contains(*expected)
     }
 
     @Test
@@ -72,9 +70,9 @@ internal class BookTests {
             { assertTrue(validator.isValid("978-0-306-40615-7")) },
             { assertTrue(validator.isValid("1935182943")) },
             { assertTrue(validator.isValid("149197317X")) },
-            { assertThat(ISBNCheckDigit.ISBN13_CHECK_DIGIT.calculate("978030640615"), `is`("7")) },
-            { assertThat(ISBNCheckDigit.ISBN10_CHECK_DIGIT.calculate("193518294"), `is`("3")) },
-            { assertThat(ISBNCheckDigit.ISBN10_CHECK_DIGIT.calculate("149197317"), `is`("X"))}
+            { assertThat(ISBNCheckDigit.ISBN13_CHECK_DIGIT.calculate("978030640615")).isEqualTo("7") },
+            { assertThat(ISBNCheckDigit.ISBN10_CHECK_DIGIT.calculate("193518294")).isEqualTo("3") },
+            { assertThat(ISBNCheckDigit.ISBN10_CHECK_DIGIT.calculate("149197317")).isEqualTo("X") }
         )
     }
 
@@ -86,8 +84,8 @@ internal class BookTests {
 
         val kotlinInAction = createMultiAuthorBook()
 
-        assertThat(mjr, `is`(books[2]))
-        assertThat(mjg, `is`(books[0]))
+        assertThat(mjr).isEqualTo(books[2])
+        assertThat(mjg).isEqualTo(books[0])
     }
 
     @ParameterizedTest

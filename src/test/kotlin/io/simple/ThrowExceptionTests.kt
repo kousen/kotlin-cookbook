@@ -1,7 +1,7 @@
 package io.simple
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.closeTo
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.offset
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -9,7 +9,7 @@ internal class ThrowExceptionTests {
 
     @Test
     fun divideWithoutException() {
-        assertThat(2.0, closeTo(ThrowException.divide(4, 2), 0.000001))
+        assertThat(2.0).isCloseTo(ThrowException.divide(4, 2), offset(0.000001))
     }
 
     @Test

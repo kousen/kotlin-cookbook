@@ -1,7 +1,6 @@
 package io
 
-import org.hamcrest.MatcherAssert
-import org.hamcrest.Matchers
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -26,7 +25,7 @@ class JumbleTest {
     @CsvSource("cautla, actual",
         "agileo, goalie", "mmlueb, mumble")
     fun `unscramble words`(clue: String, answer: String) =
-        MatcherAssert.assertThat(jumble.solve(clue), Matchers.`is`(answer))
+        assertThat(jumble.solve(clue)).isEqualTo(answer)
 
     @Test
     internal fun `check solveAll`() {

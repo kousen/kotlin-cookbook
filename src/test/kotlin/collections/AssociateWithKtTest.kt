@@ -1,7 +1,6 @@
 package collections
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 internal class AssociateWithKtTest {
@@ -15,11 +14,11 @@ internal class AssociateWithKtTest {
 
     @Test
     fun repeatAndCapitalizeUsingAssociate() {
-        assertThat(repeatAndCapitalizeUsingAssociate(keys), `is`(answer))
+        assertThat(repeatAndCapitalizeUsingAssociate(keys)).isEqualTo(answer)
     }
 
     @Test
     fun repeatAndCapitalizeUsingAssociateWith() {
-        assertThat(repeatAndCapitalizeUsingAssociateWith(keys), `is`(answer))
+        assertThat(repeatAndCapitalizeUsingAssociateWith(keys)).isEqualTo(answer)
     }
 }

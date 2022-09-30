@@ -1,11 +1,10 @@
 package coroutines
 
+import org.assertj.core.api.Assertions.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.contains
 import org.junit.jupiter.api.Test
 import java.math.BigInteger
 
@@ -19,19 +18,17 @@ internal class FibflowTest {
         }
 
         //assertEquals(listOf(0, 1, 1, 2, 3, 5, 8, 13, 21, 34), fibs)
-        assertThat(
-            fibs, contains(
-                BigInteger.ZERO,
-                BigInteger.ONE,
-                BigInteger.ONE,
-                BigInteger("2"),
-                BigInteger("3"),
-                BigInteger("5"),
-                BigInteger("8"),
-                BigInteger("13"),
-                BigInteger("21"),
-                BigInteger("34")
-            )
+        assertThat(fibs).containsExactly(
+            BigInteger.ZERO,
+            BigInteger.ONE,
+            BigInteger.ONE,
+            BigInteger("2"),
+            BigInteger("3"),
+            BigInteger("5"),
+            BigInteger("8"),
+            BigInteger("13"),
+            BigInteger("21"),
+            BigInteger("34")
         )
     }
 

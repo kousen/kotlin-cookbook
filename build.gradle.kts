@@ -1,10 +1,13 @@
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    `java-library`
+    java
     kotlin("jvm") version "1.7.20"
     kotlin("plugin.serialization") version "1.7.20"
-    id("com.palantir.graal") version "0.10.0"
+    alias(libs.plugins.versions)
+    alias(libs.plugins.version.catalog.update)
+    alias(libs.plugins.graal)
 }
 
 group = "com.kousenit"
@@ -23,22 +26,22 @@ repositories {
 
 dependencies {
     implementation(kotlin("reflect"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.serialization.json)
 
-    implementation("org.apache.commons:commons-math3:3.6.1")
-    implementation("com.google.code.gson:gson:2.9.0")
-    implementation("commons-validator:commons-validator:1.7")
-    implementation("io.ktor:ktor-client-core:2.1.1")
-    implementation("io.ktor:ktor-client-cio:2.1.1")
-    implementation("io.ktor:ktor-client-serialization:2.1.1")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.1")
-    implementation("io.ktor:ktor-client-content-negotiation:2.1.1")
+    implementation(libs.commons.math3)
+    implementation(libs.gson)
+    implementation(libs.commons.validator) {
+        // Avoid security vulnerability in commons-collections 3.2.2
+        exclude(group = "commons-collections", module = "commons-collections")
+    }
+    implementation(libs.commons.collections4)
 
+    implementation(libs.bundles.ktor.client)
 
-    testImplementation("org.hamcrest:hamcrest:2.2")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation(libs.assertj)
+    testImplementation(libs.bundles.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(kotlin("test-junit5"))
 
     implementation(kotlin("script-runtime"))

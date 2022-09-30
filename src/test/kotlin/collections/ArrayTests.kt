@@ -1,7 +1,6 @@
 package collections
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
@@ -26,7 +25,7 @@ class ArrayTests {
     internal fun `valid indices`() {
         val strings = arrayOf("this", "is", "an", "array", "of", "strings")
         val indices = strings.indices
-        assertThat(indices, contains(0, 1, 2, 3, 4, 5))
+        assertThat(indices).containsExactly(0, 1, 2, 3, 4, 5)
     }
 
     @Test
@@ -41,6 +40,6 @@ class ArrayTests {
     @Test
     internal fun `constructor with function`() {
         val squares = Array(5) { i -> (i * i).toString() }
-        assertThat(squares, `is`(arrayContaining("0", "1", "4", "9", "16")))
+        assertThat(squares).contains("0", "1", "4", "9", "16")
     }
 }

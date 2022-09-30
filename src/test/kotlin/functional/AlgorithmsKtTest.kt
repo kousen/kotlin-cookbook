@@ -1,7 +1,6 @@
 package functional
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.`is`
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
@@ -40,9 +39,9 @@ internal class AlgorithmsKtTest {
     @Test
     internal fun `Fibonacci numbers (explicit)`() {
         assertAll(
-            { assertThat(fibonacci(4), `is`(3)) },
-            { assertThat(fibonacci(9), `is`(34)) },
-            { assertThat(fibonacci(2000), `is`(1392522469)) }
+            { assertThat(fibonacci(4)).isEqualTo(3) },
+            { assertThat(fibonacci(9)).isEqualTo(34) },
+            { assertThat(fibonacci(2000)).isEqualTo(1392522469) }
         )
     }
 
@@ -50,31 +49,31 @@ internal class AlgorithmsKtTest {
     fun `first 10 Fibonacci numbers (dynamic)`() =
         fibData.map { (n, fib) ->
             DynamicTest.dynamicTest("fibonacci($n) == $fib") {
-                assertThat(fibonacci(n), `is`(fib))
+                assertThat(fibonacci(n)).isEqualTo(fib)
             }
         }
 
     @ParameterizedTest(name = "fibonacci({0}) == {1}")
     @MethodSource("fibs")
     fun `first 10 Fibonacci numbers (companion method)`(n: Int, fib: Int) =
-        assertThat(fibonacci(n), `is`(fib))
+        assertThat(fibonacci(n)).isEqualTo(fib)
 
     @ParameterizedTest(name = "fibonacci({0}) == {1}")
     @MethodSource("fibnumbers")
     fun `first 10 Fibonacci numbers (instance method)`(n: Int, fib: Int) =
-        assertThat(fibonacci(n), `is`(fib))
+        assertThat(fibonacci(n)).isEqualTo(fib)
 
     @ParameterizedTest
     @CsvSource("1, 1", "2, 1", "3, 2",
         "4, 3", "5, 5", "6, 8", "7, 13",
         "8, 21", "9, 34", "10, 55")
     fun `first 10 Fibonacci numbers (csv)`(n: Int, fib: Int) =
-        assertThat(fibonacci(n), `is`(fib))
+        assertThat(fibonacci(n)).isEqualTo(fib)
 
     @ParameterizedTest
     @MethodSource("fibonacciTestData")
     fun `check fibonacci using data class`(data: FibonacciTestData) {
-        assertThat(fibonacci(data.number), `is`(data.expected))
+        assertThat(fibonacci(data.number)).isEqualTo(data.expected)
     }
 
     private fun fibonacciTestData() = Stream.of(
@@ -90,7 +89,7 @@ internal class AlgorithmsKtTest {
     @ParameterizedTest
     @MethodSource("fibonacciTestData")
     fun `check fibonacci with fold`(data: FibonacciTestData) {
-        assertThat(fibonacciFold(data.number), `is`(data.expected))
+        assertThat(fibonacciFold(data.number)).isEqualTo(data.expected)
     }
 
     @Test
@@ -102,22 +101,23 @@ internal class AlgorithmsKtTest {
     @Test @Disabled("slow")
     internal fun `factorial tests`() {
         assertAll(
-            { assertThat(factorial(0), `is`(BigInteger.ONE)) },
-            { assertThat(factorial(1), `is`(BigInteger.ONE)) },
-            { assertThat(factorial(2), `is`(BigInteger.valueOf(2))) },
-            { assertThat(factorial(5), `is`(BigInteger.valueOf(120))) },
-            { assertThat(factorial(15000).toString().length, `is`(56130)) },
-            { assertThat(factorial(75000).toString().length, `is`(333061)) }
+            { assertThat(factorial(0)).isEqualTo(BigInteger.ONE) },
+            { assertThat(factorial(1)).isEqualTo(BigInteger.ONE) },
+            { assertThat(factorial(2)).isEqualTo(BigInteger.valueOf(2)) },
+            { assertThat(factorial(5)).isEqualTo(BigInteger.valueOf(120)) },
+
+            { assertThat(factorial(15000).toString().length).isEqualTo(56130) },
+            { assertThat(factorial(75000).toString().length).isEqualTo(333061) }
         )
     }
 
     @Test
     internal fun `check recursive factorial`() {
         assertAll(
-            { assertThat(recursiveFactorial(0), `is`(BigInteger.ONE)) },
-            { assertThat(recursiveFactorial(1), `is`(BigInteger.ONE)) },
-            { assertThat(recursiveFactorial(2), `is`(BigInteger.valueOf(2))) },
-            { assertThat(recursiveFactorial(5), `is`(BigInteger.valueOf(120))) },
+            { assertThat(recursiveFactorial(0)).isEqualTo(BigInteger.ONE) },
+            { assertThat(recursiveFactorial(1)).isEqualTo(BigInteger.ONE) },
+            { assertThat(recursiveFactorial(2)).isEqualTo(BigInteger.valueOf(2)) },
+            { assertThat(recursiveFactorial(5)).isEqualTo(BigInteger.valueOf(120)) },
             { assertThrows<StackOverflowError> { recursiveFactorial(20_000) }}
         )
     }
@@ -125,12 +125,12 @@ internal class AlgorithmsKtTest {
     @Test @Disabled("slow")
     internal fun `folding factorial tests`() {
         assertAll(
-            { assertThat(factorialFold(0), `is`(BigInteger.ONE)) },
-            { assertThat(factorialFold(1), `is`(BigInteger.ONE)) },
-            { assertThat(factorialFold(2), `is`(BigInteger.valueOf(2))) },
-            { assertThat(factorialFold(5), `is`(BigInteger.valueOf(120))) },
-            { assertThat(factorialFold(15000).toString().length, `is`(56130)) },
-            { assertThat(factorialFold(75000).toString().length, `is`(333061)) }
+            { assertThat(factorialFold(0)).isEqualTo(BigInteger.ONE) },
+            { assertThat(factorialFold(1)).isEqualTo(BigInteger.ONE) },
+            { assertThat(factorialFold(2)).isEqualTo(BigInteger.valueOf(2)) },
+            { assertThat(factorialFold(5)).isEqualTo(BigInteger.valueOf(120)) },
+            { assertThat(factorialFold(15000).toString().length).isEqualTo(56130) },
+            { assertThat(factorialFold(75000).toString().length).isEqualTo(333061) }
         )
     }
 

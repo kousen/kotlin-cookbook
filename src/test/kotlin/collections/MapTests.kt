@@ -1,7 +1,6 @@
 package collections
 
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers.*
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
 
@@ -16,11 +15,9 @@ class MapTests {
         }
 
         assertAll(
-            { assertThat(map, hasKey("a")) },
-            { assertThat(map, hasKey("b")) },
-            { assertThat(map, hasKey("c")) },
-            { assertThat(map, hasValue(1)) },
-            { assertThat(map, hasValue(2)) })
+            { assertThat(map).containsKeys("a", "b", "c") },
+            { assertThat(map).containsValues(1, 2) },
+        )
     }
 
     @Test
@@ -29,11 +26,11 @@ class MapTests {
         val p2 = "a" to 1
 
         assertAll(
-            { assertThat(p1.first, `is`("a")) },
-            { assertThat(p1.second, `is`(1)) },
-            { assertThat(p2.first, `is`("a")) },
-            { assertThat(p2.second, `is`(1)) },
-            { assertThat(p1, `is`(equalTo(p2)))}
+            { assertThat(p1.first).isEqualTo("a") },
+            { assertThat(p1.second).isEqualTo(1) },
+            { assertThat(p2.first).isEqualTo("a") },
+            { assertThat(p2.second).isEqualTo(1) },
+            { assertThat(p1).isEqualTo(p2) },
         )
     }
 
@@ -43,7 +40,7 @@ class MapTests {
 
         val (x,y) = pair
 
-        assertThat(x, `is`("a"))
-        assertThat(y, `is`(1))
+        assertThat(x).isEqualTo("a")
+        assertThat(y).isEqualTo(1)
     }
 }
