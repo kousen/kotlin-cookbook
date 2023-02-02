@@ -27,6 +27,7 @@ repositories {
 dependencies {
     implementation(kotlin("reflect"))
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.commons.math3)
