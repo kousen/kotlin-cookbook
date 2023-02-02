@@ -7,5 +7,6 @@ out/
 build/
 presources/
 *.iml
+local.properties
 
 /src/main/resources/yoda_key.txt
