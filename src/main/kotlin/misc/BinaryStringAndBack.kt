@@ -1,6 +1,6 @@
 package misc
 
-fun main(args: Array<String>) {
+fun main() {
     val a = 12
     val bString = a.toString(radix = 2)
     println(bString)

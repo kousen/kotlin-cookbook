@@ -1,6 +1,6 @@
 package misc
 
-fun main(args: Array<String>) {
+fun main() {
     val c = 'a' + (26 * Math.random()).toInt()
     printLetterType(c)
     println(returnLetterType(c))

@@ -28,7 +28,7 @@ val isEven: (Int) -> Boolean = { it % 2 == 0 }
 
 fun isOdd(i: Int) = i % 2 != 0
 
-fun main(args: Array<String>) {
+fun main() {
     mapFilterReduce()
 
     println(doubler(21))

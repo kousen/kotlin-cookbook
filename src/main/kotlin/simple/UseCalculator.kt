@@ -1,5 +1,5 @@
 package simple
 
-fun main(args: Array<String>) {
+fun main() {
     println(add(1, 1))
 }

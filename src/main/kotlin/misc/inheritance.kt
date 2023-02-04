@@ -27,7 +27,7 @@ class Hourly(
     override fun computePay(): Double = rate * hours
 }
 
-fun main(args: Array<String>) {
+fun main() {
     val fred = Hourly(1, "Fred", 25.0)
     val barney = Hourly(2, "Barney", 30.0)
     val wilma = Salaried(3, "Wilma", 75000.0)

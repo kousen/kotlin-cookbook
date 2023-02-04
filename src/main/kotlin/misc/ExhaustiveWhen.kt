@@ -28,7 +28,7 @@ fun printMod3Exhaustive(n: Int) {
 }
 
 
-fun main(args: Array<String>) {
+fun main() {
     (1..10).forEach { printMod3(it) }
     (1..10).forEach { printMod3SingleStatement(it) }
     (1..10).forEach { printMod3Exhaustive(it) }

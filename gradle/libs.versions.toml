@@ -7,8 +7,8 @@ gson = "2.10.1"
 junit = "5.9.2"
 kotlinx-coroutines-core = "1.6.4"
 kotlinx-coroutines-test = "1.6.4"
-kotlinx-serialization-json = "1.5.0-RC"
 kotlinx-datetime = "0.4.0"
+kotlinx-serialization-json = "1.5.0-RC"
 ktor-client = "2.2.3"
 
 [libraries]
