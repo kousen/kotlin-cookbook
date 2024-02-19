@@ -118,7 +118,7 @@ internal class AlgorithmsKtTest {
             { assertThat(recursiveFactorial(1)).isEqualTo(BigInteger.ONE) },
             { assertThat(recursiveFactorial(2)).isEqualTo(BigInteger.valueOf(2)) },
             { assertThat(recursiveFactorial(5)).isEqualTo(BigInteger.valueOf(120)) },
-            { assertThrows<StackOverflowError> { recursiveFactorial(20_000) }}
+            { assertThrows<StackOverflowError> { recursiveFactorial(25_000) }}
         )
     }
 

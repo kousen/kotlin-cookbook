@@ -1,14 +1,14 @@
 [versions]
-assertj = "3.24.2"
+assertj = "3.25.3"
 commons-collections4 = "4.4"
 commons-math3 = "3.6.1"
-commons-validator = "1.7"
+commons-validator = "1.8.0"
 gson = "2.10.1"
-junit = "5.9.2"
-kotlinx-coroutines-core = "1.6.4"
-kotlinx-coroutines-test = "1.6.4"
-kotlinx-datetime = "0.4.0"
-kotlinx-serialization-json = "1.5.0-RC"
+junit = "5.10.2"
+kotlinx-coroutines-core = "1.8.0"
+kotlinx-coroutines-test = "1.8.0"
+kotlinx-datetime = "0.5.0"
+kotlinx-serialization-json = "1.6.3"
 ktor-client = "2.2.3"
 
 [libraries]
@@ -44,5 +44,5 @@ ktor-client = [
 
 [plugins]
 graal = "com.palantir.graal:0.12.0"
-version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
-versions = "com.github.ben-manes.versions:0.45.0"
+version-catalog-update = "nl.littlerobots.version-catalog-update:0.8.4"
+versions = "com.github.ben-manes.versions:0.51.0"
