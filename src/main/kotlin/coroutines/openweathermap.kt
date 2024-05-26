@@ -66,7 +66,7 @@ data class Model(
     fun convertTemp(temp: Double) =
         9 * (temp - 273.15) / 5 + 32
 
-    fun convertTime(time: Long): LocalDateTime =
+    private fun convertTime(time: Long): LocalDateTime =
         Instant.ofEpochSecond(time)
             .atZone(ZoneId.systemDefault()).toLocalDateTime()
 
@@ -110,7 +110,7 @@ data class Model(
         return """
             For ${name}, as of ${df.format(time)}:
             Description  : ${weather[0].description}
-            Icon         : http://openweathermap.org/img/w/${weather[0].icon}.png
+            Icon         : https://openweathermap.org/img/w/${weather[0].icon}.png
             Current Temp : ${nf.format(temperature)} F (high: $high F, low: $low F)
             Humidity     : ${main.humidity}%
             Sunrise      : ${df.format(sunrise)}
@@ -126,20 +126,20 @@ class OpenWeatherMap {
         const val BASE = "https://api.openweathermap.org/data/2.5/weather"
     }
 
-    val APPID = java.lang.System.getenv("OPENWEATHERMAP_API_KEY")
+    private val appId: String = java.lang.System.getenv("OPENWEATHERMAP_API_KEY")
 
     private val gson: Gson = GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .setPrettyPrinting().create()
 
     fun getWeatherByZip(zip: String = "06447"): Model {
-        val url = "$BASE?zip=${zip.substring(0..4)}&appid=$APPID"
+        val url = "$BASE?zip=${zip.substring(0..4)}&appid=$appId"
         val text = URL(url).readText()
         return gson.fromJson(text, Model::class.java)
     }
 
     fun getWeatherByCity(city: String = "London"): Model {
-        val url = "$BASE?q=${city}&appid=$APPID"
+        val url = "$BASE?q=${city}&appid=$appId"
         val text = URL(url).readText()
         return gson.fromJson(text, Model::class.java)
     }

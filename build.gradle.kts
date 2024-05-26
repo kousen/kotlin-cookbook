@@ -67,7 +67,7 @@ tasks.named<Test>("test") {
 tasks.named("compileKotlin", KotlinCompilationTask::class.java) {
     compilerOptions {
         apiVersion.set(KotlinVersion.KOTLIN_2_0)
-        freeCompilerArgs = listOf("-Xexport-kdoc", "-Xjsr305=strict")
+        freeCompilerArgs = listOf("-Xjsr305=strict", "-Xuse-fir-lt=false")
         suppressWarnings = true
     }
 }

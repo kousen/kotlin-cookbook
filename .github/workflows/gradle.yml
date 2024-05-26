@@ -4,12 +4,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'temurin'
-        java-version: 17
-    - uses: gradle/gradle-build-action@v2
-      with:
-        arguments: build
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Set environment variables
+        run: echo "OPENWEATHERMAP_API_KEY=${{ secrets.OPENWEATHERMAP_API_KEY }}" >> $GITHUB_ENV
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+        env:
+          OPENWEATHERMAP_API_KEY: ${{ secrets.OPENWEATHERMAP_API_KEY }}
