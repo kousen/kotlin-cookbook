@@ -123,22 +123,23 @@ data class Model(
 
 class OpenWeatherMap {
     companion object {
-        const val base = "http://api.openweathermap.org/data/2.5/weather"
-        const val appid = "d82ee6ea026dd986ea1e975d14875060"
+        const val BASE = "https://api.openweathermap.org/data/2.5/weather"
     }
+
+    val APPID = java.lang.System.getenv("OPENWEATHERMAP_API_KEY")
 
     private val gson: Gson = GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .setPrettyPrinting().create()
 
     fun getWeatherByZip(zip: String = "06447"): Model {
-        val url = "$base?zip=${zip.substring(0..4)}&appid=$appid"
+        val url = "$BASE?zip=${zip.substring(0..4)}&appid=$APPID"
         val text = URL(url).readText()
         return gson.fromJson(text, Model::class.java)
     }
 
     fun getWeatherByCity(city: String = "London"): Model {
-        val url = "$base?q=${city}&appid=$appid"
+        val url = "$BASE?q=${city}&appid=$APPID"
         val text = URL(url).readText()
         return gson.fromJson(text, Model::class.java)
     }
