@@ -10,11 +10,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
+      - name: Print All Environment Variables
+        run: printenv
       - name: Debug Environment Variables
-        run: |
-          echo "OPENWEATHERMAP_API_KEY=${{ secrets.OPENWEATHERMAP_API_KEY }}"
+        run: echo "OPENWEATHERMAP_API_KEY=$OPENWEATHERMAP_API_KEY"
       - uses: gradle/gradle-build-action@v2
         with:
           arguments: build
         env:
-          OPENWEATHERMAP_API_KEY: ${{ secrets.OPENWEATHERMAP_API_KEY }}
+          OPENWEATHERMAP_API_KEY: ${{ env.OPENWEATHERMAP_API_KEY }}
