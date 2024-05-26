@@ -10,6 +10,8 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
+      - name: Debug Environment Variables
+        run: printenv
       - name: Set environment variables
         run: echo "OPENWEATHERMAP_API_KEY=${{ secrets.OPENWEATHERMAP_API_KEY }}" >> $GITHUB_ENV
       - uses: gradle/gradle-build-action@v2
