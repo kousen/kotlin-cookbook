@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.math.BigInteger
 import java.util.stream.Stream
 
-@Suppress("unused")
 internal class AlgorithmsKtTest {
     private val fibData = listOf(
         1 to 1, 2 to 1, 3 to 2,

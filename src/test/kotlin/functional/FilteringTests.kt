@@ -15,7 +15,7 @@ class FilteringTests {
         // type is reified, so inferred type is List<String>
 
         val ints = list.filterIsInstance<Int>()
-        val dates = list.filterIsInstance(LocalDate::class.java)
+        val dates = list.filterIsInstance<LocalDate>()
 
         assertThat(all).isEqualTo(list)
         assertThat(strings).contains("a", "b")
