@@ -1,10 +1,11 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import java.util.*
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     java
-    kotlin("jvm") version "1.8.10"
-    kotlin("plugin.serialization") version "1.8.10"
+    kotlin("jvm") version "2.0.0"
+    kotlin("plugin.serialization") version "2.0.0"
     alias(libs.plugins.versions)
     alias(libs.plugins.version.catalog.update)
     alias(libs.plugins.graal)
@@ -16,7 +17,9 @@ version = "1.0"
 val scriptname: String by project  // read value from gradle.properties
 
 graal {
-    mainClass("scripts.${scriptname.capitalize()}Kt")
+    mainClass("scripts.${scriptname.replaceFirstChar { 
+        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() 
+    }}Kt")
     outputName(scriptname)     // output is build/graal/${scriptname}
 }
 
@@ -50,8 +53,9 @@ dependencies {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 tasks.named<Test>("test") {
@@ -60,10 +64,10 @@ tasks.named<Test>("test") {
     }
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "11"
-        freeCompilerArgs = listOf("-Xjsr305=strict")
+tasks.named("compileKotlin", KotlinCompilationTask::class.java) {
+    compilerOptions {
+        apiVersion.set(KotlinVersion.KOTLIN_2_0)
+        freeCompilerArgs = listOf("-Xexport-kdoc", "-Xjsr305=strict")
         suppressWarnings = true
     }
 }
